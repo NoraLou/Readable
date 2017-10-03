@@ -18,6 +18,28 @@ class App extends Component {
         </header>
 
         <div className="container">
+
+          <div className="select-container">
+            <span>SORT BY :</span>
+            <select>
+              <optgroup label="Sort-By">
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div className="select-container">
+            <span>CATEGORY</span>
+            <select>
+              <optgroup label="Category">
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </optgroup>
+            </select>
+          </div>
+
+
           <div className="post-card">
             <div className="post-content">
                 <div className="post-details">
@@ -42,8 +64,60 @@ class App extends Component {
               </div>
             </div>
           </div>
-        </div>
 
+          <div className="post-card">
+            <div className="post-content">
+                <div className="post-details">
+                 <span>Title</span>
+                 <span>10-02-17</span>
+                 <span>Funny McFace</span>
+                </div>
+                <div className="post-summary">
+                 <p> slkfjalkjdf kslkjf lkjdflkajllkj   kdjflkaj  lkdjfall  lkjdflkjlklakjdf </p>
+                </div>
+            </div>
+            <div className="voting">
+              <div className="content">
+                <span className="icon-wrap">
+                  <MdThumbDown size={30}/>
+                  <div className="vote-total">14</div>
+                </span>
+                <span className="icon-wrap">
+                  <MdThumbUp size={30}/>
+                  <div className="vote-total">3</div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="post-card">
+            <div className="post-content">
+                <div className="post-details">
+                 <span>Title</span>
+                 <span>10-02-17</span>
+                 <span>Funny McFace</span>
+                </div>
+                <div className="post-summary">
+                 <p> slkfjalkjdf kslkjf lkjdflkajllkj   kdjflkaj  lkdjfall  lkjdflkjlklakjdf </p>
+                </div>
+            </div>
+            <div className="voting">
+              <div className="content">
+                <span className="icon-wrap">
+                  <MdThumbDown size={30}/>
+                  <div className="vote-total">14</div>
+                </span>
+                <span className="icon-wrap">
+                  <MdThumbUp size={30}/>
+                  <div className="vote-total">3</div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
       </div>
     )
   }

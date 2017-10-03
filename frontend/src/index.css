@@ -31,6 +31,18 @@ header {
   height: 100vh;
 }
 
+
+.select-container {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+
+
+
 .post-card {
   position: relative;
   color: black;
@@ -45,8 +57,7 @@ header {
 .post-content {
   display: inline-block;
   width: 70%;
-  padding-bottom: 5px;
-  height: 100px;
+  padding: 20px;
 }
 
 .content{
@@ -56,9 +67,14 @@ header {
   padding-left: 20px;
 }
 
+.post-details {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px
+}
+
 .post-details span {
-  margin-right: 10px;
-  padding: 10px 0;
+  margin-right: 15px;
 }
 
 .post-summary p {
