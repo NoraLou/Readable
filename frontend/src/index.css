@@ -25,48 +25,71 @@ header {
   padding: 0 20px;
 }
 
-
 .container {
   margin:0 auto;
-  max-width: 800px;
-  min-width: 600px;
+  width: 800px;
   height: 100vh;
-  border: solid blue 2px;
 }
 
-
-/** Posts **/
 .post-card {
   position: relative;
   color: black;
   background: white;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-  width: 100%;
-  min-height: 100px;
   margin-bottom: 20px;
   margin-top: 20px;
+  height: 100px;
 }
 
-.content {
-  width: 96%;
-  margin: 2%;
-  height: 40px;
-  background: pink;
-  position: absolute;
-}
 
 .post-content {
-  width: 65%;
-  height: 40px;
-  background: yellow;
   display: inline-block;
+  width: 70%;
+  padding-bottom: 5px;
+  height: 100px;
+}
+
+.content{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.post-details span {
+  margin-right: 10px;
+  padding: 10px 0;
+}
+
+.post-summary p {
+  margin: 0;
+  padding: 0;
 }
 
 .voting {
-  width: 35%;
-  height: 40px;
-  background: green;
+  width: 24.5%;
+  text-align: center;
+  height: 100px;
+  background: white;
+  border-left: solid darkgrey 2px;
   display: inline-block;
+  color:grey;
+}
+
+.voting .content {
+  text-align: center;
+}
+
+.icon-wrap {
+  display: inline-block;
+  color: grey;
+  text-align: center;
+  padding: 0 15px;
+
+}
+
+.vote-total {
+  padding-top: 10px;
 }
 
 
