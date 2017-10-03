@@ -28,7 +28,6 @@ class App extends Component {
               </optgroup>
             </select>
           </div>
-
           <div className="select-container">
             <span>CATEGORY</span>
             <select>
@@ -41,7 +40,7 @@ class App extends Component {
 
 
           <div className="post-card">
-            <div className="post-content">
+            <div className="post-content content">
                 <div className="post-details">
                  <span>Title</span>
                  <span>10-02-17</span>
@@ -66,7 +65,7 @@ class App extends Component {
           </div>
 
           <div className="post-card">
-            <div className="post-content">
+            <div className="post-content content">
                 <div className="post-details">
                  <span>Title</span>
                  <span>10-02-17</span>
@@ -91,7 +90,7 @@ class App extends Component {
           </div>
 
           <div className="post-card">
-            <div className="post-content">
+            <div className="post-content content">
                 <div className="post-details">
                  <span>Title</span>
                  <span>10-02-17</span>
