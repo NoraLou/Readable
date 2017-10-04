@@ -7,8 +7,12 @@ html, body {
   height: 100vh;
 }
 
+.navbar {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
 
-header {
+
+/*header {
   width: 100%;
   margin: auto;
   background: #2962FF;
@@ -31,7 +35,6 @@ header {
   height: 100vh;
 }
 
-
 .select-container {
   display: inline-block;
   width: 50%;
@@ -39,8 +42,6 @@ header {
   margin-top: 40px;
   margin-bottom: 20px;
 }
-
-
 
 
 .post-card {
@@ -107,18 +108,18 @@ header {
 .vote-total {
   padding-top: 10px;
 }
+*/
 
-
-/** Utility **/
-.float-right {
+/** Utility *
+/*.float-right {
   float: right;
-}
+}*/
 /*.box-shadow {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
 }*/
 
 
-.full-post-detail {
+/*.full-post-detail {
   background: white;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   padding: 20px;
@@ -128,6 +129,6 @@ header {
 .full-post-detail .post-details {
 
 
-}
+}*/
 
 

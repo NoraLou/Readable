@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import MdAddCircleOutline from'react-icons/lib/md/add-circle-outline';
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
 import { fetchAllPosts } from '../utils/api.js'
+
+import Header from './common/Header'
 
 class App extends Component {
 
@@ -17,17 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <header>ion
-          <div className="header-container">
-            <span>READABLE</span>
-            <span className="float-right">
-              <MdAddCircleOutline size={40}/>
-            </span>
-          </div>
-        </header>
-
-
+        <Header />
         {/* App Container */}
         <div className="container">
 
