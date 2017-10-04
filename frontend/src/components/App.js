@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import MdAddCircleOutline from'react-icons/lib/md/add-circle-outline';
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
+import { fetchAllPosts } from '../utils/api.js'
 
 class App extends Component {
+
+  state = {
+    posts : null
+  }
+
+  componentDidMount() {
+    fetchAllPosts()
+  }
+
   render() {
     return (
       <div className="App">
@@ -17,8 +27,11 @@ class App extends Component {
           </div>
         </header>
 
+
+        {/* App Container */}
         <div className="container">
 
+        {/* Dropdowns */}
           <div className="select-container">
             <span>SORT BY :</span>
             <select>
@@ -38,7 +51,7 @@ class App extends Component {
             </select>
           </div>
 
-
+         {/* POSTS */}
           <div className="post-card">
             <div className="post-content content">
                 <div className="post-details">
@@ -116,7 +129,8 @@ class App extends Component {
 
 
 
-        </div>
+        </div>{/* App Container */}
+
       </div>
     )
   }
