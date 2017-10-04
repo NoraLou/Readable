@@ -7,10 +7,6 @@ html, body {
   height: 100vh;
 }
 
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
 
 header {
   width: 100%;
@@ -64,9 +60,11 @@ header {
   padding-left: 20px;
 }
 
-.post-content {
-  display: inline-block;
-  width: 70%;
+.content{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .post-details {
@@ -115,10 +113,10 @@ header {
 .float-right {
   float: right;
 }
+/*.box-shadow {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
+}*/
 
-/*
-* post-detail-view
-*/
 
 .full-post-detail {
   background: white;
@@ -128,74 +126,8 @@ header {
 }
 
 .full-post-detail .post-details {
-  color: grey;
-  margin-bottom: 0px
-}
 
-.full-post-content {
-  padding: 20px;
-  margin: 20px 0;
-  margin-top: 80px;
-  border: solid 1.5px darkgrey;
-  border-radius: 15px;
-}
 
-.full-vote-tally-container {
-  display: inline-block;
-  width: 50%;
-  text-align: center;
 }
 
 
-/*
-* add a new comment
-*/
-.comment-add {
-  color: grey;
-  padding: 30px 0;
-}
-
-.comment-add .circle {
-  padding: 20px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-}
-
-/*
-* comments list
-*/
-.all-comments-container {
-
-}
-
-.all-comments-container .voting{
-  width: 15%;
-  border-right: solid 2px darkgrey;
-  position: absolute;
-  height: 100px;
-}
-
-.all-comments-container .content{
-  padding: 25px 0 0 0;
-  text-align: center;
-}
-
-.comment-content {
-  position: absolute;
-  margin-left: 15%;
-  width: 70%;
-  height: 100px;
-}
-
-.comment-content .post-details, .post-summary {
-  padding: 0 15px 0 15px;
-}
-
-.editing {
-  display: inline-block;
-  margin-left: 85%;
-  width: 15%;
-  border-left: solid 2px darkgrey;
-  height: 100px;
-}
