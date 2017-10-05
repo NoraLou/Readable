@@ -10,7 +10,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      posts: []
+      posts: [],
+      sortBy: 'voteScore'
     }
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Home />
+        <Home posts={this.state.posts} sortBy={this.state.sortBy}/>
       </div>
     )
   }
