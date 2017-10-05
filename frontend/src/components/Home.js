@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
-import { FormControl } from 'react-bootstrap';
+//import { FormControl } from 'react-bootstrap';
 //import { ListPosts } from './ListPosts';
 
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
-import { MenuItem, Grid, Row, Col } from 'react-bootstrap';
+import { Button, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 
 class Home extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        sortBy :'voteScore'
+
+        sortBy : this.voteSort
       }
     }
 
+    voteSort = (a, b) => {
+      return b.voteScore - a.voteScore
+    }
 
+    dateSort = (a, b) => {
+      if (a.timestamp - b.timestamp  === 0 ) {
+        return a
+      } else {
+        return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
+      }
+    }
 
-  posts = [
+    test = [
     {id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
     title: 'Learn Redux in 10 minutes!',
@@ -34,12 +45,35 @@ class Home extends Component {
     category: 'react',
     voteScore: 6,
     deleted: false},
+
+    {id: '8jsdjhfd',
+    timestamp: 1467166872634,
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
+    author: 'thingtwo',
+    category: 'react',
+    voteScore: 3,
+    deleted: false},
+
+    {id: 'dd253nd',
+    timestamp: 1507235633036,
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
+    author: 'thingtwo',
+    category: 'react',
+    voteScore: 1,
+    deleted: false},
+
+    {id: 'zdd253nd',
+    timestamp: 1507235733680,
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
+    author: 'thingtwo',
+    category: 'react',
+    voteScore: -22,
+    deleted: false},
   ]
 
-  groupSelect = (e) => {
-    console.log(e)
-    {/*https://stackoverflow.com/questions/42446542/react-bootstrap-set-value-of-formcontrol-select*/}
-  }
 
   sortByOptions = ['Vote Score', 'Date']
 
@@ -48,6 +82,18 @@ class Home extends Component {
   render() {
 
     const { posts } = this.props
+
+    const postsReadableDate = this.test.map( post  => {
+      let date = new Date (post.timestamp)
+      let formatDate = date.toDateString()
+      return {
+        ...post,
+        ['formatDate'] : formatDate
+      }
+    })
+
+    console.log('postsReadableDate', postsReadableDate)
+
     console.log('this.props :', this.props)
 
     return (
@@ -55,41 +101,39 @@ class Home extends Component {
       <div>
 
         <div className='container'>
-          <FormControl componentClass="select" placeholder="Group" value={this.state.sortBy}>
-            inputRef={ref => { this.groupSelect = ref; }}
-            onChange={this.groupSelect}>
-            <option value="voteScore">Vote Score</option>
-            <option value="date">Date</option>
-          </FormControl>
+          <div>SORT BY :</div>
+          <a href="#voteScore" onClick={() => this.setState(this.state.sortBy: 'voteScore')}> Vote Score </a>
+          <a href="#date" onClick={() => this.setState(this.state.sortBy: 'voteScore')}> Date </a>
         </div>
 
         <Grid className="post-list">
-          <Row className="post-card">
-            <Col xs={8} className="post-grid-item">
-              <div className="content">
-                <div>Learn Redux in 10 minutes!</div>
-                <div className="post-details">
-                  <span>Date</span><span>User</span>
+          {postsReadableDate.sort(this.dateSort).map((post) => (
+            <Row className="post-card" key={post.id}>
+              <Col xs={8} className="post-grid-item">
+                <div className="content">
+                  <div>{post.title}</div>
+                  <div className="post-details">
+                    <span>{post.formatDate}</span><span>{post.author}</span>
+                  </div>
+                    {post.body}
                 </div>
-                lkdjflskjflkja d lisdjflk liadkklskdjflkjsldkfj
-                lksjflak lkj lk lkadjfkjalkdsjf
-              </div>
-            </Col>
-            <Col xs={4} className="post-grid-item">
-              <div className="content voting">
-                <div>
-                  <span className="icon-wrap">
-                    <MdThumbUp size={30}/>
-                    <div className="vote-total">14</div>
-                  </span>
-                  <span className="icon-wrap">
-                    <MdThumbDown size={30}/>
-                    <div className="vote-total">3</div>
-                  </span>
+              </Col>
+              <Col xs={4} className="post-grid-item">
+                <div className="content voting">
+                  <div>
+                    <div>{post.voteScore}</div>
+                    <span className="icon-wrap">
+                      <MdThumbUp size={30}/>
+                    </span>
+                    <span className="icon-wrap">
+                      <MdThumbDown size={30}/>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+          ))}
+
         </Grid>
 
       </div>
