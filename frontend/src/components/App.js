@@ -7,12 +7,19 @@ import Home from './Home';
 
 class App extends Component {
 
-  state = {
-    posts : null
+  constructor(props) {
+    super(props)
+    this.state = {
+      posts: []
+    }
   }
 
   componentDidMount() {
-    fetchAllPosts()
+    fetchAllPosts().then((posts) => {
+      console.log("posts :", posts)
+      this.setState({posts});
+      console.log('this.state.posts', this.state.posts)
+    })
   }
 
   render() {

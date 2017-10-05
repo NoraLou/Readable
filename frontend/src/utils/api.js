@@ -1,20 +1,35 @@
-// const allPostsURL = 'http://localhost:3001/posts'
-// const auth = 'super_secret'
+const URL = 'http://localhost:3001/'
+const auth = 'super_secret'
 
-export function fetchAllPosts () {
-  return fetch( 'http://localhost:3001/posts', { headers: { 'Authorization': 'super_secret'}})
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(` RES DATA : ${data}`)
-      let posts = data.results
-      console.log("posts :", posts)
-      console.log( "data.results ", data.results)
-    })
+// export const getAllPosts = () => {
+//    const url = 'http://localhost:3001/posts';
+//    fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
+//      .then( (res) => { return(res.text()) })
+//      .then((data) => {
+//        console.log("data :", JSON.parse(data))
+//        var p = []
+//        p = JSON.parse(data)
+//        console.log("p :", p)
+//      });
+//  }
+
+export const fetchAllPosts = () => {
+  return fetch( `${URL}posts`, { headers: { 'Authorization': auth }})
+    .then(res => res.text())
+    .then(data =>  JSON.parse(data))
     .catch((error) => {
       console.log(`Error : ${error}`)
     })
 }
 
+// export const fetchAllPosts = () => {
+//   return fetch( `${URL}posts`, { headers: { 'Authorization': auth }})
+//     .then((res) => res.json())
+//     .then( ({posts}) => posts.map( ({post})  => post)        )
+//     .catch((error) => {
+//       console.log(`Error : ${error}`)
+//     })
+// }
 
 // export function createPost() {
 //   r
