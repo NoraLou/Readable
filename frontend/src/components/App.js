@@ -4,6 +4,10 @@ import MdThumbUp from 'react-icons/lib/md/thumb-up';
 import { fetchAllPosts } from '../utils/api.js';
 import Header from './common/Header';
 import Home from './Home';
+// import {addPost} from '../actions'
+import * as API from './../utils/api.js'
+import {connect} from 'react-redux'
+
 
 class App extends Component {
 
@@ -11,16 +15,24 @@ class App extends Component {
     super(props)
     this.state = {
       posts: [],
-      sortBy: 'voteScore'
+      sortBy: 'voteScore',
+      categories: []
     }
   }
 
   componentDidMount() {
-    fetchAllPosts().then((posts) => {
-      console.log("posts :", posts)
+    API.fetchAllPosts().then((posts) => {
+      // console.log("posts :", posts)
       this.setState({posts});
-      console.log('this.state.posts', this.state.posts)
+      // console.log('this.state.posts', this.state.posts)
     })
+
+    API.fetchAllCategories().then((categories) => {
+      this.setState({categories})
+      console.log(this.state)
+    })
+
+
   }
 
   render() {
