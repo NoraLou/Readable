@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
-import { Button, MenuItem, Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class Home extends Component {
     constructor(props) {
@@ -35,13 +35,13 @@ class Home extends Component {
       let formatDate = date.toDateString()
       return {
         ...post,
-        ['formatDate'] : formatDate
+        formatDate
       }
     })
 
-    console.log('postsReadableDate', postsReadableDate)
+    // console.log('postsReadableDate', postsReadableDate)
 
-    console.log('this.props :', this.props)
+    // console.log('this.props :', this.props)
 
     return (
 

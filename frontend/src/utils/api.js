@@ -1,3 +1,6 @@
+import fetch from 'isomorphic-fetch'
+import { v4 } from 'uuid';
+
 const URL = 'http://localhost:3001/'
 const headers = {
   headers: {
@@ -5,6 +8,8 @@ const headers = {
 
   },
 }
+
+
 
 export const fetchAllPosts = () => {
   return fetch( `${URL}posts`, {...headers})
@@ -25,8 +30,22 @@ export const fetchAllCategories = () => {
 }
 
 
-
-
-
-
-
+export const addPost = (post) => {
+  const id = v4();
+  const timestamp = Date.now();
+  post = {
+    ...post,
+    id,
+    timestamp
+  }
+  console.log("post:", post)
+  return fetch( `${URL}posts`, {
+    method: "POST",
+    headers: { 'Authorization': 'super-secret'},
+    body: post
+  })
+  .then( res => console.log('res ', res))
+  .catch((error) => {
+    console.log(`Error : ${error}`)
+  })
+}

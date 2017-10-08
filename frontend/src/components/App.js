@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import MdThumbDown from 'react-icons/lib/md/thumb-down';
-import MdThumbUp from 'react-icons/lib/md/thumb-up';
-import { fetchAllPosts } from '../utils/api.js';
+// import MdThumbDown from 'react-icons/lib/md/thumb-down';
+// import MdThumbUp from 'react-icons/lib/md/thumb-up';
 import Header from './common/Header';
 import Home from './Home';
 // import {addPost} from '../actions'
 import * as API from './../utils/api.js'
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
+
+
+const testPost = {
+  title: 'Redux is hard',
+  body: 'I hope I can truly understand it',
+  author: 'Nora',
+  category: 'redux'
+}
 
 
 class App extends Component {
@@ -29,8 +36,11 @@ class App extends Component {
 
     API.fetchAllCategories().then((categories) => {
       this.setState({categories})
-      console.log(this.state)
+      // console.log(this.state)
     })
+
+
+    API.addPost(testPost)
 
 
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import MdAddCircleOutline from 'react-icons/lib/md/add-circle-outline';
+// import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
+//import MdAddCircleOutline from 'react-icons/lib/md/add-circle-outline';
 import { Nav, Navbar, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
 
 class Header extends Component {
@@ -11,7 +11,7 @@ class Header extends Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">READABLE</a>
+            <a href="/">READABLE</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

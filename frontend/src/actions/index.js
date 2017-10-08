@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
 
 export const GET_POST = 'GET_POST'
 export const SET_POSTS= 'SET_POSTS'
