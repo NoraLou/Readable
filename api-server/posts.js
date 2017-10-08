@@ -30,7 +30,6 @@ function getData (token) {
   if (data == null) {
     data = db[token] = clone(defaultData)
   }
-  console.log('from posts.js sending data :', data, "with token :", token)
   return data
 }
 

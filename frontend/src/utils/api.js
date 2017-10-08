@@ -38,14 +38,19 @@ export const addPost = (post) => {
     id,
     timestamp
   }
-  console.log("post:", post)
   return fetch( `${URL}posts`, {
     method: "POST",
     headers: { 'Authorization': 'super-secret'},
-    body: post
+    body: JSON.stringify({...post})
   })
-  .then( res => console.log('res ', res))
+  .then( data => {
+    console.log("data ", data)
+    return data
+  })
   .catch((error) => {
     console.log(`Error : ${error}`)
   })
 }
+
+
+// JSON.stringify({author, body, id, parentId, timestamp})
