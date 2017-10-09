@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 // import MdThumbDown from 'react-icons/lib/md/thumb-down';
 // import MdThumbUp from 'react-icons/lib/md/thumb-up';
+import { Route } from 'react-router-dom'
 import Header from './common/Header';
 import Home from './Home';
-// import {addPost} from '../actions'
 import * as API from './../utils/api.js'
 // import {connect} from 'react-redux'
+import  PostDetail from './PostDetail'
+import  NewPost from './NewPost'
+
 
 
 class App extends Component {
@@ -18,8 +21,6 @@ class App extends Component {
       categories: []
     }
   }
-
-
 
   componentDidMount() {
     API.fetchAllPosts().then((posts) => {
@@ -34,11 +35,17 @@ class App extends Component {
   }
 
   render() {
+
     return (
+
       <div className="App">
-        <Header />
-        <Home posts={this.state.posts} sortBy={this.state.sortBy}/>
+        <Route exact path="/" render={ () => (
+          <Home posts={this.state.posts} />
+        )}>
+        </Route>
+        <Route exact path="/new" component={ NewPost }/>
       </div>
+
     )
   }
 }

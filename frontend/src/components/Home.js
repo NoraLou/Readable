@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
 
 class Home extends Component {
     constructor(props) {
@@ -39,19 +39,46 @@ class Home extends Component {
       }
     })
 
-    // console.log('postsReadableDate', postsReadableDate)
-
-    // console.log('this.props :', this.props)
 
     return (
 
       <div>
 
-        <div className='container'>
-          <div>SORT BY :</div>
-          <a href="#score" onClick={() => this.setState( {sortBy: this.voteSort} )}> Score </a>
-          <a href="#date" onClick={() => this.setState( {sortBy: this.dateSort} )}> Date </a>
-        </div>
+        <nav className="home-nav" style={{backgroundColor:"darkgrey", minHeight:"60", color:"white", lineHeight:"70px", verticalAlign: 'middle'}}>
+          <Grid>
+            <Row>
+              <Col xs={12} sm={4}>
+                <h1>Readable</h1>
+              </Col>
+              <Col xs={12} sm={8}>
+                <div className='category-buttons pull-right'>
+                  <Button>All</Button>
+                  <Button>React</Button>
+                  <Button>Redux</Button>
+                  <Button>Udacity</Button>
+                </div>
+              </Col>
+            </Row>
+          </Grid>
+        </nav>
+
+
+        <Grid style={{paddingTop:'20'}}>
+          <Row>
+            <Col xs={6}>
+              <div>SORT BY :</div>
+              <a href="#score" onClick={() => this.setState( {sortBy: this.voteSort} )}> Score </a>
+              <a href="#date" onClick={() => this.setState( {sortBy: this.dateSort} )}> Date </a>
+            </Col>
+            <Col xs={6}>
+              <div className="pull-right">
+                <Button>NEW POST</Button>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
+
+
         <Grid className="post-list">
           {postsReadableDate.sort(this.state.sortBy).map((post) => (
             <Row className="post-card" key={post.id}>
