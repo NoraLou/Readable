@@ -21,13 +21,10 @@ const putMethod = {
   method: 'PUT'
 }
 
+
 export const fetchAllPosts = () => {
   return fetch( `${URL}posts`, {...headers})
-    .then(res => res.text())
-    .then(data =>  JSON.parse(data))
-    .catch((error) => {
-      console.log(`Error : ${error}`)
-    })
+    .then( data => data.json())
 }
 
 export const deletePost = (id) => {

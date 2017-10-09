@@ -1,31 +1,38 @@
-import { ADD_POST, DELETE_POST, EDIT_POST } from '../actions'
+import { combineReducers } from 'redux'
+import {
+  RECEIVE_POSTS,
+  ADD_POST,
+  DELETE_POST,
+  EDIT_POST,
+  VOTE_POST,
+} from '../actions/post'
+
+import { RECEIVE_CATEGORIES } from '../actions/category'
 
 
+function posts( state=[], action) {
+  switch (action.type) {
+    case RECEIVE_POSTS:
+      return
+        posts: action.posts
+    default:
+      return state
+  }
+}
 
+//const initialCategory = [{ name :'all', path: '/'}]
 
-// function calendar (state = initialCalendarState, action){
-//   const { day, recipe, meal } = action
+function categories( state = [], action) {
+  switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      return
+        action.categories
+    default:
+      return state
+  }
+}
 
-//   switch (action.type) {
-//     case ADD_RECIPE:
-//       return {
-//         ...state,
-//          [day] : {
-//            ...state[day],
-//            [meal]: recipe.label
-//          }
-//        }
-//      case REMOVE_FROM_CALENDAR:
-//        return {
-//          ...state,
-//          [day]: {
-//            ...state[day],
-//            [meal]: null
-//          }
-//        }
-//      default:
-//        return state
-//    }
-
-
-//   export default calendar
+export default combineReducers({
+  posts,
+  categories
+})
