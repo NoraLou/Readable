@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom'
 import Home from './Home';
 import PostDetail from './PostDetail'
 import NewPost from './NewPost'
+import { connect } from 'react-redux'
+import { fetchAllPosts } from '../actions/postAction'
+import { fetchAllCategories } from '../actions/categoryAction'
 
 
 class App extends Component {
@@ -10,24 +13,42 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sortBy: 'voteScore',
+      sortByMethod: 'voteScore',
     }
   }
 
-  // componentDidMount() {
+  componentDidMount() {
 
-  // }
+    const { dispatchBoundGetAllPosts, dispatchBoundGetAllCategories } = this.props
+    dispatchBoundGetAllPosts()
+    dispatchBoundGetAllCategories()
+  }
 
   render() {
+    console.log("Props :", this.props)
 
     return (
 
       <div className="App">
-        Hello
+        Hello {this.props.name}
       </div>
 
     )
   }
 }
 
-export default App;
+// function mapStateToProps({ posts, categories} ) {
+//   return {
+//     posts : 'test',
+//     categories: 'test'
+//   }
+// }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchBoundGetAllPosts : (data) => dispatch(fetchAllPosts()),
+    dispatchBoundGetAllCategories : (data) => dispatch(fetchAllCategories()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

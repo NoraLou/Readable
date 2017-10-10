@@ -5,16 +5,16 @@ import {
   DELETE_POST,
   EDIT_POST,
   VOTE_POST,
-} from '../actions/post'
+} from '../actions/postAction'
 
-import { RECEIVE_CATEGORIES } from '../actions/category'
+import { RECEIVE_CATEGORIES } from '../actions/categoryAction'
 
 
 function posts( state=[], action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return
-        posts: action.posts
+        posts.action
     default:
       return state
   }

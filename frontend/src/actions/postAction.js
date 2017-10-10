@@ -10,8 +10,11 @@ export const VOTE_POST = 'VOTE_POST'
 
 export function fetchAllPosts() {
   return dispatch => {
-    return  PostAPI.fetchAllPosts()
-      .then(json => dispatch(receivePosts(json)))
+    return PostAPI.fetchAllPosts()
+      .then(json => {
+        console.log('fetchAllPost Action  json :', json)
+        return dispatch(receivePosts(json))
+      })
   }
 }
 
