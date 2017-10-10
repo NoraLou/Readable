@@ -14,7 +14,7 @@ function posts( state=[], action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return
-        posts.action
+        action.posts
     default:
       return state
   }
