@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     const { dispatchBoundGetAllPosts, dispatchBoundGetAllCategories } = this.props
     dispatchBoundGetAllPosts()
     dispatchBoundGetAllCategories()
@@ -30,19 +29,20 @@ class App extends Component {
     return (
 
       <div className="App">
-        Hello {this.props.name}
+        <Route exact path="/" component={ Home }/>
+        <Route exact path="/new" component={ NewPost }/>
       </div>
 
     )
   }
 }
 
-// function mapStateToProps({ posts, categories} ) {
-//   return {
-//     posts : 'test',
-//     categories: 'test'
-//   }
-// }
+function mapStateToProps({ posts, categories} ) {
+  return {
+    posts,
+    categories
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -51,4 +51,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

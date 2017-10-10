@@ -12,9 +12,11 @@ import { RECEIVE_CATEGORIES } from '../actions/categoryAction'
 
 function posts( state=[], action) {
   switch (action.type) {
+
     case RECEIVE_POSTS:
-      return
-        action.posts
+      return [
+        ...action.posts
+      ]
     default:
       return state
   }
@@ -25,8 +27,9 @@ function posts( state=[], action) {
 function categories( state = [], action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
-      return
-        action.categories
+      return [
+       ...action.categories
+      ]
     default:
       return state
   }

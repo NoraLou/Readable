@@ -80,6 +80,7 @@ class Home extends Component {
 
 
         <Grid className="post-list">
+
           {postsReadableDate.sort(this.state.sortBy).map((post) => (
             <Row className="post-card" key={post.id}>
               <Col xs={8} className="post-grid-item">

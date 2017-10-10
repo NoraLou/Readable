@@ -11,7 +11,7 @@ const headers = {
 export const fetchAllCategories = () => {
   return fetch( `${URL}categories`, {...headers})
     .then(res => res.json())
-    // .then(data => data.categories)
+    .then(data => data.categories)
 }
 
 
