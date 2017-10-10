@@ -12,17 +12,26 @@ export function fetchAllPosts() {
   return dispatch => {
     return PostAPI.fetchAllPosts()
       .then(json => {
-        console.log('fetchAllPost Action  json :', json)
-        return dispatch(receivePosts(json))
+         return dispatch(receivePosts(json))
       })
+  }
+}
+
+
+const formatDate = (post) => {
+  if (post.formattedDate) return post
+  let date = new Date (post.timestamp)
+  let formattedDate = date.toDateString()
+  return {
+    ...post,
+    formattedDate
   }
 }
 
 function receivePosts( posts ) {
   return {
     type: RECEIVE_POSTS,
-    posts
+    posts: posts.map(post => formatDate(post))
   }
 }
 
-// posts: json.data.children.map(child => child.data),

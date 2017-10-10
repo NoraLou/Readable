@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-//import { FormControl } from 'react-bootstrap';
-//import { ListPosts } from './ListPosts';
-
 import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { connect } from 'react-redux'
+import { fetchAllPosts } from '../actions/postAction'
+import { fetchAllCategories } from '../actions/categoryAction'
+
+
 
 class Home extends Component {
     constructor(props) {
@@ -12,6 +14,12 @@ class Home extends Component {
       this.state = {
         sortBy : this.voteSort
       }
+    }
+
+    componentDidMount() {
+      const { dispatch } = this.props
+      dispatch(fetchAllPosts())
+      dispatch(fetchAllCategories())
     }
 
     voteSort = (a, b) => {
@@ -30,20 +38,9 @@ class Home extends Component {
 
     const { posts } = this.props
 
-    const postsReadableDate = posts.map( post  => {
-      let date = new Date (post.timestamp)
-      let formatDate = date.toDateString()
-      return {
-        ...post,
-        formatDate
-      }
-    })
-
-
     return (
 
       <div>
-
         <nav className="home-nav" style={{backgroundColor:"darkgrey", minHeight:"60", color:"white", lineHeight:"70px", verticalAlign: 'middle'}}>
           <Grid>
             <Row>
@@ -62,7 +59,6 @@ class Home extends Component {
           </Grid>
         </nav>
 
-
         <Grid style={{paddingTop:'20'}}>
           <Row>
             <Col xs={6}>
@@ -80,14 +76,13 @@ class Home extends Component {
 
 
         <Grid className="post-list">
-
-          {postsReadableDate.sort(this.state.sortBy).map((post) => (
+          {posts.sort(this.state.sortBy).map((post) => (
             <Row className="post-card" key={post.id}>
               <Col xs={8} className="post-grid-item">
                 <div className="content">
                   <div>{post.title}</div>
                   <div className="post-details">
-                    <span>{post.formatDate}</span><span>{post.author}</span>
+                    <span>{post.formattedDate}</span><span>{post.author}</span>
                   </div>
                     {post.body}
                 </div>
@@ -108,12 +103,20 @@ class Home extends Component {
             </Row>
           ))}
         </Grid>
-
       </div>
 
     )
   }
 }
 
-export default Home;
+function mapStateToProps({ posts, categories} ) {
+  return {
+    posts,
+    categories
+  }
+}
+
+
+export default connect(mapStateToProps)(Home)
+
 
