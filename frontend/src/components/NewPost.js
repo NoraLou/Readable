@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, Col, Button, Row, Grid, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
+import { Alert, Col, Button, Row, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { postAddPost } from '../actions/postAction'
-import { MdClear } from 'react-icons/lib/md/clear'
 
 
 const defaultNewState = {
@@ -16,10 +15,6 @@ const defaultNewState = {
 }
 
 class NewPost extends Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   state = {
     ...defaultNewState

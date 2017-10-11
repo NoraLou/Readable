@@ -3,23 +3,19 @@ import MdThumbDown from 'react-icons/lib/md/thumb-down';
 import MdThumbUp from 'react-icons/lib/md/thumb-up';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { fetchAllPosts } from '../actions/postAction'
-import { fetchAllCategories } from '../actions/categoryAction'
+import { fetchAllPosts, postVoteChange } from '../actions/postAction'
 import { Link } from 'react-router-dom'
 
 
 
 class Home extends Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        sortBy : this.voteSort
-      }
+
+    state = {
+      sortBy : this.voteSort
     }
 
     componentDidMount() {
-      const { dispatch } = this.props
-      dispatch(fetchAllPosts())
+      this.props.dispatch(fetchAllPosts())
     }
 
     voteSort = (a, b) => {
@@ -32,6 +28,14 @@ class Home extends Component {
       } else {
         return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
       }
+    }
+
+    upVote = (id) => {
+      this.props.dispatch(postVoteChange(id, "upVote"))
+    }
+
+    downVote = (id) => {
+      this.props.dispatch(postVoteChange(id, "downVote"))
     }
 
   render() {
@@ -95,10 +99,10 @@ class Home extends Component {
                 <div className="content voting">
                   <div>
                     <div>{post.voteScore}</div>
-                    <span className="icon-wrap">
+                    <span className="icon-wrap" onClick={()=> {this.upVote(post.id)}}>
                       <MdThumbUp size={30}/>
                     </span>
-                    <span className="icon-wrap">
+                    <span className="icon-wrap" onClick={()=> {this.downVote(post.id)}}>
                       <MdThumbDown size={30}/>
                     </span>
                   </div>

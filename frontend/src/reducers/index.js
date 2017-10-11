@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import {
   RECEIVE_POSTS,
   RECEIVE_POST,
+  RECEIVE_POST_VOTE
 } from '../actions/postAction'
 
 import { RECEIVE_CATEGORIES } from '../actions/categoryAction'
@@ -20,6 +21,9 @@ function posts( state=[], action) {
         ...state,
         ...action.post
       ]
+    case RECEIVE_POST_VOTE:
+      console.log("Vote State : ", state)
+      return state
     default:
       return state
   }

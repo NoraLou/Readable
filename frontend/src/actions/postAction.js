@@ -2,11 +2,11 @@ import * as PostAPI from '../utils/postAPI'
 
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-
 export const RECEIVE_POST = 'RECEIVE_POST'
+export const RECEIVE_POST_VOTE = 'RECEIVE_POST_VOTE'
 
-export const DELETE_POST = 'DELETE_POST'
-export const EDIT_POST = 'EDIT_POST'
+// export const DELETE_POST = 'DELETE_POST'
+// export const EDIT_POST = 'EDIT_POST'
 export const VOTE_POST = 'VOTE_POST'
 
 
@@ -37,9 +37,26 @@ export function fetchAllPosts() {
   }
 }
 
+//or just pass in the post.voteScore ?f
+function receiveVoteChange( post ){
+  return {
+    type: RECEIVE_POST_VOTE,
+    post
+  }
+}
+export function postVoteChange( id, option ){
+  return dispatch => {
+    return PostAPI.votePost(id, option)
+      .then(json => {
+        return dispatch(receiveVoteChange(json))
+      })
+  }
+}
+
 
 
 function receiveAddedPost( post ) {
+  post.comments = 0
   return {
     type: RECEIVE_POST,
     post

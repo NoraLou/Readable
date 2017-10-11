@@ -9,7 +9,7 @@ import { createLogger } from 'redux-logger'
 import rootReducer from './reducers';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import registerServiceWorker from './registerServiceWorker'
+//import registerServiceWorker from './registerServiceWorker'
 
 const loggerMiddleware = createLogger()
 
@@ -21,9 +21,9 @@ const store = createStore (
   )
 )
 
-// console.log('store :', store)
+console.log('store :', store)
 
-// console.log("Store state :", store.getState())
+console.log("Store state :", store.getState())
 
 ReactDOM.render(
 

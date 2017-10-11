@@ -8,16 +8,13 @@ import { fetchAllCategories } from '../actions/categoryAction'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchAllCategories())
   }
 
   render() {
+
     return (
 
         <div className="App">
