@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
+
 import {
   RECEIVE_POSTS,
-  ADD_POST,
-  DELETE_POST,
-  EDIT_POST,
-  VOTE_POST,
+  RECEIVE_POST,
 } from '../actions/postAction'
 
 import { RECEIVE_CATEGORIES } from '../actions/categoryAction'
@@ -17,12 +15,15 @@ function posts( state=[], action) {
       return [
         ...action.posts
       ]
+    case RECEIVE_POST:
+      return [
+        ...state,
+        ...action.post
+      ]
     default:
       return state
   }
 }
-
-//const initialCategory = [{ name :'all', path: '/'}]
 
 function categories( state = [], action) {
   switch (action.type) {

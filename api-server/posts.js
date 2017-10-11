@@ -76,7 +76,6 @@ function add (token, post) {
       voteScore: 1,
       deleted: false
     }
-
     res(posts[post.id])
   })
 }
@@ -93,7 +92,6 @@ function vote (token, id, option) {
             post.voteScore = post.voteScore - 1
             break
         default:
-            console.log(`posts.vote received incorrect parameter: ${option}`)
     }
     res(post)
   })

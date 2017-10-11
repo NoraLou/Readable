@@ -83,7 +83,7 @@ export const addPost = (post) => {
       ...headers,
       body: JSON.stringify({...post}),
     })
-    .then( data => data)
+    .then( res => res.json())
     .catch((error) => {
       console.log(`Error : ${error}`)
     })

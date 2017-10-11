@@ -5,6 +5,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { fetchAllPosts } from '../actions/postAction'
 import { fetchAllCategories } from '../actions/categoryAction'
+import { Link } from 'react-router-dom'
 
 
 
@@ -19,7 +20,6 @@ class Home extends Component {
     componentDidMount() {
       const { dispatch } = this.props
       dispatch(fetchAllPosts())
-      dispatch(fetchAllCategories())
     }
 
     voteSort = (a, b) => {
@@ -36,7 +36,7 @@ class Home extends Component {
 
   render() {
 
-    const { posts } = this.props
+    const { posts, categories } = this.props
 
     return (
 
@@ -49,10 +49,11 @@ class Home extends Component {
               </Col>
               <Col xs={12} sm={8}>
                 <div className='category-buttons pull-right'>
-                  <Button>All</Button>
-                  <Button>React</Button>
-                  <Button>Redux</Button>
-                  <Button>Udacity</Button>
+                  {categories.map( (cat) =>
+                    <Link key={cat.name} to={cat.path}>
+                      <Button>{cat.name}</Button>
+                    </Link>
+                  )}
                 </div>
               </Col>
             </Row>
@@ -60,6 +61,7 @@ class Home extends Component {
         </nav>
 
         <Grid style={{paddingTop:'20'}}>
+
           <Row>
             <Col xs={6}>
               <div>SORT BY :</div>
@@ -68,7 +70,9 @@ class Home extends Component {
             </Col>
             <Col xs={6}>
               <div className="pull-right">
-                <Button>NEW POST</Button>
+                <Link to="/new">
+                  <Button>NEW POST</Button>
+                </Link>
               </div>
             </Col>
           </Row>
@@ -112,7 +116,7 @@ class Home extends Component {
 function mapStateToProps({ posts, categories} ) {
   return {
     posts,
-    categories
+    categories: [ {name:"all", path:'/'} , ...categories ]
   }
 }
 

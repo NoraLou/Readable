@@ -21,9 +21,9 @@ const store = createStore (
   )
 )
 
-console.log('store :', store)
+// console.log('store :', store)
 
-console.log("Store state :", store.getState())
+// console.log("Store state :", store.getState())
 
 ReactDOM.render(
 
