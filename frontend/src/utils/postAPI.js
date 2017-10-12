@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { v4 } from 'uuid';
+import { fetchPostComments } from './commentsAPI'
 
 const URL = 'http://localhost:3001/';
 const headers = {
@@ -21,10 +22,43 @@ const putMethod = {
   method: 'PUT'
 }
 
+// export const mapCommentsToPosts = (postsArray) =>{
 
+// }
+
+
+//do something to make sure this just called initially...
 export const fetchAllPosts = () => {
   return fetch( `${URL}posts`, {...headers})
-    .then( data => data.json())
+    .then( res => res.json())
+    .then( postsArray => {
+
+      const fetchPostCommentsPromises = postsArray.map( post => {
+        return fetchPostComments(post.id)
+      })
+      return Promise.all(fetchPostCommentsPromises).then(( allCommentsArr ) => {
+        allCommentsArr.reduce( ( accum, curr ) => {
+            if (curr.length) {
+              let commentCount = curr.length
+              let parentId = curr[0].parentId
+              accum[parentId] = commentCount
+            }
+            return accum
+          }, {})
+      })
+      .then( commentsHash => {
+        postsArray.map( post => {
+          let commentValue = commentsHash[post.id] ? commentsHash[post.id] : 0
+          return {
+            ...post,
+           ['commentCount']:commentValue
+          }
+        })
+      })
+
+
+
+  })
 }
 
 export const deletePost = (id) => {

@@ -59,7 +59,13 @@ html, body {
   padding: 10px;
 }
 
+.comment-icon {
+  position: relative;
 
+}
+.comment-count {
+  position: absolute;
+}
 
 
 

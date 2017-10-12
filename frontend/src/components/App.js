@@ -9,8 +9,9 @@ import { fetchAllCategories } from '../actions/categoryAction'
 class App extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchAllCategories())
+
+    //const { dispatch } = this.props
+    //dispatch(fetchAllCategories())
   }
 
   render() {
@@ -27,10 +28,11 @@ class App extends Component {
   }
 }
 
-function mapStateToProps( {categories} ) {
-  return {
-    categories
-  }
-}
+// function mapStateToProps( {categories} ) {
+//   return {
+//     categories
+//   }
+// }
 
-export default withRouter(connect(mapStateToProps)(App))
+// export default withRouter(connect(mapStateToProps)(App))
+export default App

@@ -22,6 +22,10 @@ const formatDate = (post) => {
 
 
 
+
+
+
+
 function receivePosts( posts ) {
   return {
     type: RECEIVE_POSTS,
@@ -32,6 +36,7 @@ export function fetchAllPosts() {
   return dispatch => {
     return PostAPI.fetchAllPosts()
       .then(json => {
+        console.log("json :", json)
          return dispatch(receivePosts(json))
       })
   }
@@ -55,7 +60,7 @@ export function postVoteChange( id, option ){
 
 
 function receiveAddedPost( post ) {
-  post.comments = 0
+  post.commentCount = 0
   return {
     type: RECEIVE_POST,
     post
