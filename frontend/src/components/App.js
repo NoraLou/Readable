@@ -28,7 +28,6 @@ class App extends Component {
 }
 
 function mapStateToProps( {categories} ) {
-  console.log("categories :", categories)
   return {
     categories
   }

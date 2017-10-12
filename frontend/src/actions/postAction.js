@@ -37,7 +37,6 @@ export function fetchAllPosts() {
   }
 }
 
-//or just pass in the post.voteScore ?f
 function receiveVoteChange( post ){
   return {
     type: RECEIVE_POST_VOTE,

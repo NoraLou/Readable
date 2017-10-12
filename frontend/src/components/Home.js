@@ -43,9 +43,10 @@ class Home extends Component {
     const { posts, categories } = this.props
 
     return (
-
       <div>
+
         <nav className="home-nav" style={{backgroundColor:"darkgrey", minHeight:"60", color:"white", lineHeight:"70px", verticalAlign: 'middle'}}>
+
           <Grid>
             <Row>
               <Col xs={12} sm={4}>
@@ -53,7 +54,7 @@ class Home extends Component {
               </Col>
               <Col xs={12} sm={8}>
                 <div className='category-buttons pull-right'>
-                  {categories.map( (cat) =>
+                  {categories.map((cat) =>
                     <Link key={cat.name} to={cat.path}>
                       <Button>{cat.name}</Button>
                     </Link>
@@ -62,6 +63,7 @@ class Home extends Component {
               </Col>
             </Row>
           </Grid>
+
         </nav>
 
         <Grid style={{paddingTop:'20'}}>
@@ -112,14 +114,15 @@ class Home extends Component {
           ))}
         </Grid>
       </div>
-
     )
   }
 }
 
+
 function mapStateToProps({ posts, categories} ) {
+
   return {
-    posts,
+    posts : Object.keys(posts).map(key => posts[key]),
     categories: [ {name:"all", path:'/'} , ...categories ]
   }
 }
