@@ -21,20 +21,15 @@ const formatDate = (post) => {
 }
 
 
-
-
-
-
-
 function receivePosts( posts ) {
   return {
     type: RECEIVE_POSTS,
     posts: posts.map(post => formatDate(post))
   }
 }
-export function fetchAllPosts() {
+export function fetchAllPosts( category ) {
   return dispatch => {
-    return PostAPI.fetchAllPosts()
+    return PostAPI.fetchAllPosts( category )
       .then(json => {
         return dispatch(receivePosts(json))
       })
