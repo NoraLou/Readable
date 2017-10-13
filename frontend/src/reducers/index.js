@@ -13,12 +13,12 @@ function posts( state={}, action) {
   switch (action.type) {
 
     case RECEIVE_POSTS:
+
       const posts = action.posts.reduce( (postHash, postObj) => {
           postHash[postObj.id] = postObj
           return postHash
         },{})
       return {
-        ...state,
         ...posts
       }
 

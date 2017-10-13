@@ -15,10 +15,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      console.log("calling componentDidMount")
-      console.log("this.props.match.params.category :", this.props.match.params.category)
       if (this.props.match.params.category) {
-        let currCategory = this.props.match.category
+        let currCategory = this.props.match.params.category
         this.props.dispatch(fetchAllPosts(currCategory))
       } else {
         this.props.dispatch(fetchAllPosts())
@@ -26,25 +24,12 @@ class Home extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-      console.log("calling componentWillReceiveProps")
-
       if (nextProps.match.params.category !== this.props.match.params.category) {
         const { dispatch } = nextProps
         const  newCategory = nextProps.match.params.category
-        console.log("with newCategory :", newCategory)
         dispatch(fetchAllPosts(newCategory))
       }
-
     }
-
-    // componentDidUpdate(prevProps) {
-    //   console.log("calling componentDidUpdate")
-    //   // if (this.props.match.category !== prevProps.match.category) {
-    //   //   const { dispatch } = this.props
-    //   //   dispatch(fetchAllPosts(this.props.match.category))
-    //   // }
-    // }
-
 
     voteSort = (a, b) => {
       return b.voteScore - a.voteScore
@@ -67,7 +52,7 @@ class Home extends Component {
     }
 
   render() {
-    // console.log("this.props :" ,this.props )
+
     const { posts, categories, match } = this.props
 
     return (

@@ -3,27 +3,23 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
-import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import rootReducer from './reducers';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import registerServiceWorker from './registerServiceWorker'
 
-const loggerMiddleware = createLogger()
 
-const store = createStore (
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
   rootReducer,
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
+  composeEnhancers(
+    applyMiddleware(thunk)
   )
-)
-
-// console.log('store :', store)
-
-// console.log("Store state :", store.getState())
+);
 
 ReactDOM.render(
   <Provider store={store}>

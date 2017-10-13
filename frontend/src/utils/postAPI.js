@@ -50,13 +50,16 @@ const addCommentCount = (arrPosts) => {
 
 export const fetchAllPosts = (category) => {
   if (category) {
-    (console.log("fetch all posts from API with category :", category))
     return fetch(`${URL}${category}/posts`, {...headers})
-      .then( res => res.json())
+      .then( res => {
+        return res.json()
+      })
       .then( arrPosts => addCommentCount(arrPosts))
   } else {
     return fetch( `${URL}posts`, {...headers})
-      .then( res => res.json())
+      .then( res => {
+        return res.json()
+      })
       .then( arrPosts => addCommentCount(arrPosts))
   }
 }

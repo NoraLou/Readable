@@ -30,7 +30,6 @@ class NewPost extends Component {
 
   isValid = (post) => {
     for ( let prop in post) {
-      console.log(post[prop])
       if (post[prop] === '' || post[prop] === 'none selected' || post[prop] === undefined) {
         return false
       }
@@ -136,8 +135,9 @@ class NewPost extends Component {
                   inputRef={(ref)=>{this.category = ref}}
                   onChange={() => this.setState({category: this.category.value}) }>
                     <option value="none selected">none selected</option>
-                    <option value="redux">redux</option>
-                    <option value="react">react</option>
+                    {this.props.categories.map( (cat,idx) =>
+                      <option value={cat.name}>{cat.name}</option>
+                    )}
                 </FormControl>
               </FormGroup>
             </Col>
