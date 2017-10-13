@@ -24,9 +24,7 @@ const putMethod = {
 
 
 const addCommentCount = (arrPosts) => {
-
   const commentPromises = arrPosts.map(post => fetchPostComments(post.id))
-
   return Promise.all(commentPromises)
     .then( allCommentsArr => {
       return allCommentsArr.reduce( (accum,curr) => {
@@ -50,10 +48,17 @@ const addCommentCount = (arrPosts) => {
 }
 
 
-export const fetchAllPosts = () => {
-  return fetch( `${URL}posts`, {...headers})
-    .then( res => res.json())
-    .then( arrPosts => addCommentCount(arrPosts))
+export const fetchAllPosts = (category) => {
+  if (category) {
+    (console.log("fetch all posts from API with category :", category))
+    return fetch(`${URL}${category}/posts`, {...headers})
+      .then( res => res.json())
+      .then( arrPosts => addCommentCount(arrPosts))
+  } else {
+    return fetch( `${URL}posts`, {...headers})
+      .then( res => res.json())
+      .then( arrPosts => addCommentCount(arrPosts))
+  }
 }
 
 

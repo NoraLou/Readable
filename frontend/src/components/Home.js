@@ -15,8 +15,36 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      this.props.dispatch(fetchAllPosts())
+      console.log("calling componentDidMount")
+      console.log("this.props.match.params.category :", this.props.match.params.category)
+      if (this.props.match.params.category) {
+        let currCategory = this.props.match.category
+        this.props.dispatch(fetchAllPosts(currCategory))
+      } else {
+        this.props.dispatch(fetchAllPosts())
+      }
     }
+
+    componentWillReceiveProps( nextProps ) {
+      console.log("calling componentWillReceiveProps")
+
+      if (nextProps.match.params.category !== this.props.match.params.category) {
+        const { dispatch } = nextProps
+        const  newCategory = nextProps.match.params.category
+        console.log("with newCategory :", newCategory)
+        dispatch(fetchAllPosts(newCategory))
+      }
+
+    }
+
+    // componentDidUpdate(prevProps) {
+    //   console.log("calling componentDidUpdate")
+    //   // if (this.props.match.category !== prevProps.match.category) {
+    //   //   const { dispatch } = this.props
+    //   //   dispatch(fetchAllPosts(this.props.match.category))
+    //   // }
+    // }
+
 
     voteSort = (a, b) => {
       return b.voteScore - a.voteScore
@@ -39,8 +67,8 @@ class Home extends Component {
     }
 
   render() {
-
-    const { posts, categories } = this.props
+    // console.log("this.props :" ,this.props )
+    const { posts, categories, match } = this.props
 
     return (
 
@@ -54,8 +82,8 @@ class Home extends Component {
               </Col>
               <Col xs={12} sm={8}>
                 <div className='category-buttons pull-right'>
-                  {categories.map((cat) =>
-                    <Link key={cat.name} to={cat.path}>
+                  {categories.map((cat, idx) =>
+                    <Link key={idx} to={cat.path}>
                       <Button>{cat.name}</Button>
                     </Link>
                   )}
@@ -117,11 +145,12 @@ class Home extends Component {
 }
 
 
-function mapStateToProps({ posts, categories} ) {
+function mapStateToProps({ posts, categories }) {
 
   return {
     posts : Object.keys(posts).map(key => posts[key]),
     categories: [ {name:"all", path:'/'} , ...categories ]
+
   }
 }
 

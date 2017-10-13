@@ -21,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/new" component={NewPost}/>
+            <Route exact path='/:category' component={Home}/>
           </Switch>
         </div>
     )

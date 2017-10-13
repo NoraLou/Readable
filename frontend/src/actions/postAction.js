@@ -36,8 +36,7 @@ export function fetchAllPosts() {
   return dispatch => {
     return PostAPI.fetchAllPosts()
       .then(json => {
-        console.log("json :", json)
-         return dispatch(receivePosts(json))
+        return dispatch(receivePosts(json))
       })
   }
 }
