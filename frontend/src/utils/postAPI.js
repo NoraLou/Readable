@@ -22,44 +22,40 @@ const putMethod = {
   method: 'PUT'
 }
 
-// export const mapCommentsToPosts = (postsArray) =>{
 
-// }
+const addCommentCount = (arrPosts) => {
+
+  const commentPromises = arrPosts.map(post => fetchPostComments(post.id))
+
+  return Promise.all(commentPromises)
+    .then( allCommentsArr => {
+      return allCommentsArr.reduce( (accum,curr) => {
+        if (curr.length) {
+            let commentCount = curr.length
+            let parentId = curr[0].parentId
+            accum[parentId] = commentCount
+          }
+        return accum
+      }, {})
+    })
+    .then((commentsHash) =>
+      arrPosts.map( (post) => {
+        let commentValue = commentsHash[post.id] ? commentsHash[post.id] : 0
+        return {
+          ...post,
+          ['commentCount']:commentValue
+        }
+      })
+    )
+}
 
 
-//do something to make sure this just called initially...
 export const fetchAllPosts = () => {
   return fetch( `${URL}posts`, {...headers})
     .then( res => res.json())
-    .then( postsArray => {
-
-      const fetchPostCommentsPromises = postsArray.map( post => {
-        return fetchPostComments(post.id)
-      })
-      return Promise.all(fetchPostCommentsPromises).then(( allCommentsArr ) => {
-        allCommentsArr.reduce( ( accum, curr ) => {
-            if (curr.length) {
-              let commentCount = curr.length
-              let parentId = curr[0].parentId
-              accum[parentId] = commentCount
-            }
-            return accum
-          }, {})
-      })
-      .then( commentsHash => {
-        postsArray.map( post => {
-          let commentValue = commentsHash[post.id] ? commentsHash[post.id] : 0
-          return {
-            ...post,
-           ['commentCount']:commentValue
-          }
-        })
-      })
-
-
-
-  })
+    .then( arrPosts => addCommentCount(arrPosts))
 }
+
 
 export const deletePost = (id) => {
   return fetch(`${URL}posts/${id}`, {
