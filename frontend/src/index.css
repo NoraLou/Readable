@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: gainsboro;
+  background: #eee;
   width: 100%;
   height: 100vh;
 }
@@ -11,20 +11,38 @@ html, body {
   max-width: 900px
 }
 
-.navbar {
+.row {
+  margin: 0;
+}
+
+.main-nav {
+  background: darkgrey;
+  margin-bottom: 40px;
+  height: 95px;
+  color: white;
+  line-height: 95px;
+  vertical-align: middle;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-.post-card.row {
+.card.row {
+  background: white;
   height: 150px;
   margin: 15px 0;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 
 }
 
-.post-grid-item{
-  padding: 0
+.card-grid{
+  padding: 0;
+  display: inline-block;
 }
+
+.edit-controls a {
+  padding-right: 15px
+
+}
+
 
 .content {
   height: 150px;
@@ -33,17 +51,17 @@ html, body {
   position: relative;
 }
 
-.post-details{
+.card-details{
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.post-details span {
+.card-details span {
   margin-right: 15px;
 }
 
 .content.voting {
-  border-left: solid 2px grey;
+  border-right: solid 2px grey;
 }
 
 .content.voting>div {
@@ -59,102 +77,51 @@ html, body {
   padding: 10px;
 }
 
-.comment-icon {
-  position: relative;
 
-}
-.comment-count {
-  position: absolute;
-}
+/*****************
+* Post Detail
+*******************/
 
-
-
-
-/*post-card {
-  position: relative;
-  color: black;
-  background: white;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+.post-item-detail {
   margin-bottom: 20px;
-  margin-top: 20px;
-  height: 100px;
 }
 
-.content{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
+.post-item-detail .card {
+  height: 100%;
+  padding: 40px 0;
 }
 
-.content{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
+.post-item-detail .content {
+  height: 100%;
+  padding: 10px 0;
 }
 
-.post-details {
+.post-item-detail .edit-controls {
+  font-size: 18px;
+  padding-right: 40px;
+  padding-top: 25px;
+  padding-bottom: 12px;
+}
+
+/*.post-item-detail .edit-controls a {
+  padding-right: 15px;
+}*/
+
+.post-item-detail .content.voting {
+  border-right: none;
+  height: 120px;
+}
+
+.post-item-detail .comments {
+  padding-right: 40px;
+}
+
+
+.post-item-detail h4 {
   margin: 0;
-  padding: 0;
-  margin-bottom: 15px
 }
 
-.post-details span {
-  margin-right: 15px;
-}
-
-.post-summary p {
-  margin: 0;
-  padding: 0;
-}
-
-.voting {
-  width: 24.5%;
-  text-align: center;
-  height: 100px;
-  background: white;
-  border-left: solid darkgrey 2px;
-  display: inline-block;
-  color:grey;
-}
-
-.voting .content {
-  text-align: center;
-}
-
-.icon-wrap {
-  display: inline-block;
-  color: grey;
-  text-align: center;
-  padding: 0 15px;
-
-}
-
-.vote-total {
-  padding-top: 10px;
-}
-*/
-
-/** Utility *
-/*.float-right {
-  float: right;
-}*/
-/*.box-shadow {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
-}*/
 
 
-/*.full-post-detail {
-  background: white;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-  padding: 20px;
-  margin-top: 40px;
-}
-
-.full-post-detail .post-details {
-
-
-}*/
 
 

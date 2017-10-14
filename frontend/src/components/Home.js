@@ -59,7 +59,7 @@ class Home extends Component {
 
       <div>
 
-        <nav className="home-nav" style={{backgroundColor:"darkgrey", minHeight:"60", color:"white", lineHeight:"70px", verticalAlign: 'middle'}}>
+        <nav className="main-nav" >
           <Grid>
             <Row>
               <Col xs={12} sm={4}>
@@ -78,8 +78,7 @@ class Home extends Component {
           </Grid>
         </nav>
 
-        <Grid style={{paddingTop:'20'}}>
-
+        <Grid style={{paddingBottom:'20'}}>
           <Row>
             <Col xs={6}>
               <div>SORT BY :</div>
@@ -96,34 +95,45 @@ class Home extends Component {
           </Row>
         </Grid>
 
-        <Grid className="post-list">
+        <Grid className="card-list">
           {posts.sort(this.state.sortBy).map((post) => (
-            <Row className="post-card" key={post.id}>
-              <Col xs={8} className="post-grid-item">
-                <div className="content">
-                  <span>{post.title}</span><span className="pull-right">Comments :<span className="comment-count">{post.commentCount}</span></span>
-                  <div className="post-details">
-                    <span>{post.formattedDate}</span><span>{post.author}</span>
-                  </div>
-                    {post.body}
-                </div>
-              </Col>
-              <Col xs={4} className="post-grid-item">
+            <Row className="card" key={post.id}>
+              <Col xs={2} className="card-grid">
                 <div className="content voting">
                   <div>
-                    <div>{post.voteScore}</div>
                     <span className="icon-wrap" onClick={()=> {this.upVote(post.id)}}>
-                      <MdThumbUp size={30}/>
+                      <MdThumbUp size={25}/>
                     </span>
+                      <div>{post.voteScore}</div>
                     <span className="icon-wrap" onClick={()=> {this.downVote(post.id)}}>
-                      <MdThumbDown size={30}/>
+                      <MdThumbDown size={25}/>
                     </span>
                   </div>
                 </div>
+              </Col>
+              <Col xs={10} className="card-grid">
+                <Row>
+                  <Col xs={8}>
+                    <Link to={`${post.category}/${post.id}`}>
+                      <h4>{post.title}</h4>
+                    </Link>
+                  </Col>
+                  <Col xs={4}>
+                    <h5 className="edit-controls text-right">
+                      <a href="/new">Edit</a>
+                      <a>Delete</a>
+                    </h5>
+                  </Col>
+                </Row>
+                <Col xs={12}>
+                  <span>{post.formattedDate}</span><span>{post.author}</span><span className="pull-right">Comments: 13</span>
+                  <p>{post.body}</p>
+                </Col>
               </Col>
             </Row>
           ))}
         </Grid>
+
       </div>
     )
   }

@@ -136,7 +136,7 @@ class NewPost extends Component {
                   onChange={() => this.setState({category: this.category.value}) }>
                     <option value="none selected">none selected</option>
                     {this.props.categories.map( (cat,idx) =>
-                      <option value={cat.name}>{cat.name}</option>
+                      <option key={idx} value={cat.name}>{cat.name}</option>
                     )}
                 </FormControl>
               </FormGroup>
