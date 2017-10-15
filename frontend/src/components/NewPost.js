@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Col, Button, Row, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { postAddPost } from '../actions/postAction'
+import { postAddPost } from '../actions/postActions'
 
 
 const defaultNewState = {

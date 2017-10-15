@@ -78,6 +78,7 @@ export const deletePost = (id) => {
 }
 
 export const getPost = (id) => {
+  console.log("inside API with id :", id)
   return fetch(`${URL}posts/${id}`, {...headers})
   .then( data => data.json())
   .catch((error) => {

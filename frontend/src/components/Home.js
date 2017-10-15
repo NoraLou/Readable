@@ -4,7 +4,7 @@ import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import MdChatBubbleOutline from 'react-icons/lib/md/chat-bubble-outline'
 import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { fetchAllPosts, postVoteChange } from '../actions/postAction'
+import { fetchAllPosts, postVoteChange } from '../actions/postActions'
 import { Link } from 'react-router-dom'
 
 

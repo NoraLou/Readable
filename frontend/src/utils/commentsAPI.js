@@ -21,8 +21,8 @@ const putMethod = {
   method: 'PUT'
 }
 
-export const fetchPostComments = (postID) => {
-  return fetch( `${URL}posts/${postID}/comments`, {...headers})
+export const fetchPostComments = (postId) => {
+  return fetch( `${URL}posts/${postId}/comments`, {...headers})
   .then(res => res.json())
 }
 

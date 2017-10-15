@@ -4,9 +4,13 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_POST_VOTE
-} from '../actions/postAction'
+} from '../actions/postActions'
 
-import { RECEIVE_CATEGORIES } from '../actions/categoryAction'
+import {
+  RECEIVE_POST_COMMENTS
+} from '../actions/commentActions'
+
+import { RECEIVE_CATEGORIES } from '../actions/categoryActions'
 
 
 function posts( state={}, action) {
@@ -50,7 +54,25 @@ function categories( state=[], action) {
   }
 }
 
+
+function comments( state={}, action ) {
+  switch (action.type) {
+
+    case RECEIVE_POST_COMMENTS:
+      const comments = action.comments.reduce( (commentHash, commentObj) => {
+          commentHash[commentObj.id] = commentObj
+          return commentHash
+        },{})
+      return {
+        ...comments
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
+  comments,
   posts,
   categories
 })

@@ -1,15 +1,37 @@
 import React, { Component } from 'react'
-import MdDelete from 'react-icons/lib/md/delete'
-import MdCreate from 'react-icons/lib/md/create'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import MdAdd from 'react-icons/lib/md/add'
 import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { getPost } from '../actions/postActions'
+import { connect } from 'react-redux'
+import ListComments  from './ListComments'
 
 
 class PostDetail extends Component {
+
+  componentDidMount() {
+    if (this.props.match.params.postId) {
+      const postId = this.props.match.params.postId
+      this.props.dispatch(getPost(postId))
+    }
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    if (nextProps.match.params.postId !== this.props.match.params.postId) {
+      const newId = nextProps.match.params.postId
+      this.props.newId(getPost(newId))
+    }
+
+  }
+
   render() {
+
+    const { posts } = this.props
+    const { postId } = this.props.match.params
+
+    const foundID = posts.filter((post) => post.id === postId)
+    let post = foundID.length ? foundID[0] : {}
 
     return (
 
@@ -42,7 +64,7 @@ class PostDetail extends Component {
             <Col xs={10} className="card-grid-item">
               <Row>
                 <Col xs={12} sm={8}>
-                  <h2>I am the title!!!</h2>
+                  <h2>{post.title}</h2>
                 </Col>
                 <Col xs={12} sm={4}>
                   <div className="edit-controls">
@@ -53,7 +75,7 @@ class PostDetail extends Component {
                </Row>
                <Row>
                 <Col xs={12} sm={8}>
-                  <h4 className="content">By Author <span> at date</span></h4>
+                  <h4 className="content">{post.author}<span>{post.formattedDate}</span></h4>
                 </Col>
                 <Col xs={12} sm={4}>
                   <h4 className="content">Comments:10</h4>
@@ -61,107 +83,24 @@ class PostDetail extends Component {
                </Row>
                <Row>
                 <Col xs={12}>
-                  <p className="content"> lsfhlaskhfjsa fhkjsdhf   adlfkjalskdfjlkajf  sdjfhsj  kjshdfk  kajdhfkjhadjhkj kjdh </p>
+                  <p className="content">{post.body}</p>
                 </Col>
                </Row>
             </Col>
           </Row>
         </Grid>
-
-        <Grid style={{paddingBottom:'20'}}>
-          <Row>
-            <Col xs={6}>
-              <div>SORT BY :</div>
-              <a href="#score" onClick={() => this.setState( {sortBy: this.voteSort} )}> Score </a>
-              <a href="#date" onClick={() => this.setState( {sortBy: this.dateSort} )}> Date </a>
-            </Col>
-            <Col xs={6}>
-              <div className="pull-right">
-                <Link to="/new">
-                  <Button>NEW COMMENT</Button>
-                </Link>
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-
-        <Grid className="card-list">
-            <Row className="card">
-              <Col xs={2} className="card-grid">
-                <div className="content voting">
-                  <div>
-                    <span className="icon-wrap">
-                      <MdThumbUp size={25}/>
-                    </span>
-                      <div>voteScore</div>
-                    <span className="icon-wrap">
-                      <MdThumbDown size={25}/>
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col xs={10} className="card-grid">
-                <Row>
-                  <Col xs={8}>
-                    <h4>Title</h4>
-                  </Col>
-                  <Col xs={4}>
-                    <h5 className="edit-controls text-right">
-                      <a href="/new">Edit</a>
-                      <a>Delete</a>
-                    </h5>
-                  </Col>
-                </Row>
-                <Col xs={12}>
-                  <span>formattedDate</span><span>author</span><span className="pull-right">Comments: 13</span>
-                  <p>lksjfla sdlf  lkjsdf al   lakjdf alkdj lkjdflkj alksdj lkj f</p>
-                </Col>
-              </Col>
-            </Row>
-
-            <Row className="card">
-              <Col xs={2} className="card-grid">
-                <div className="content voting">
-                  <div>
-                    <span className="icon-wrap">
-                      <MdThumbUp size={25}/>
-                    </span>
-                      <div>voteScore</div>
-                    <span className="icon-wrap">
-                      <MdThumbDown size={25}/>
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col xs={10} className="card-grid">
-                <Row>
-                  <Col xs={8}>
-                    <h4>Title</h4>
-                  </Col>
-                  <Col xs={4}>
-                    <h5 className="edit-controls text-right">
-                      <a href="/new">Edit</a>
-                      <a>Delete</a>
-                    </h5>
-                  </Col>
-                </Row>
-                <Col xs={12}>
-                  <span>formattedDate</span><span>author</span><span className="pull-right">Comments: 13</span>
-                  <p>lksjfla sdlf  lkjsdf al   lakjdf alkdj lkjdflkj alksdj lkj f</p>
-                </Col>
-              </Col>
-            </Row>
-
-        </Grid>
-
-
-
-
       </div>
-
     )
   }
 }
 
-export default PostDetail
+function mapStateToProps({ posts }) {
+
+  return {
+    posts: Object.keys(posts).map(key => posts[key])
+  }
+
+}
+
+export default connect(mapStateToProps)(PostDetail)
 

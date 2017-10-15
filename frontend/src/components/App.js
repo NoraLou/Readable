@@ -4,7 +4,7 @@ import Home from './Home';
 import NewPost from './NewPost'
 import PostDetail from './PostDetail'
 import { connect } from 'react-redux'
-import { fetchAllCategories } from '../actions/categoryAction'
+import { fetchAllCategories } from '../actions/categoryActions'
 
 
 class App extends Component {
