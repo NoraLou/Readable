@@ -29,11 +29,8 @@ class ListComments extends Component {
     }
   }
 
-
   render() {
-
     const { comments } = this.props
-
     return (
       <div>
         <Grid style={{paddingBottom:'20'}}>
@@ -62,7 +59,7 @@ class ListComments extends Component {
                     <span className="icon-wrap">
                       <MdThumbUp size={25}/>
                     </span>
-                      <div>voteScore</div>
+                      <div>{comment.voteScore}</div>
                     <span className="icon-wrap">
                       <MdThumbDown size={25}/>
                     </span>

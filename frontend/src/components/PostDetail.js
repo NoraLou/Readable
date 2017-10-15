@@ -27,8 +27,9 @@ class PostDetail extends Component {
 
   render() {
 
-    const { posts } = this.props
+    const { posts , comments } = this.props
     const { postId } = this.props.match.params
+    let commentCount = Object.keys(comments).length
 
     const foundID = posts.filter((post) => post.id === postId)
     let post = foundID.length ? foundID[0] : {}
@@ -78,7 +79,7 @@ class PostDetail extends Component {
                   <h4 className="content">{post.author}<span>{post.formattedDate}</span></h4>
                 </Col>
                 <Col xs={12} sm={4}>
-                  <h4 className="content">Comments:10</h4>
+                  <h4 className="content">Comments:{commentCount}</h4>
                 </Col>
                </Row>
                <Row>
@@ -96,10 +97,11 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, comments}) {
 
   return {
-    posts: Object.keys(posts).map(key => posts[key])
+    posts: Object.keys(posts).map(key => posts[key]),
+    comments,
   }
 
 }
