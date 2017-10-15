@@ -55,10 +55,10 @@ class Home extends Component {
 
     const { posts, categories, match } = this.props
 
+    console.log("posts :", posts)
+
     return (
-
       <div>
-
         <nav className="main-nav" >
           <Grid>
             <Row>
@@ -126,7 +126,7 @@ class Home extends Component {
                   </Col>
                 </Row>
                 <Col xs={12}>
-                  <span>{post.formattedDate}</span><span>{post.author}</span><span className="pull-right">Comments: 13</span>
+                  <span>{post.formattedDate}</span><span>{post.author}</span><span className="pull-right">Comments :{post.commentCount}</span>
                   <p>{post.body}</p>
                 </Col>
               </Col>

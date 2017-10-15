@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { fetchPostComments } from '../actions/commentActions'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import { voteSort, dateSort } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
 
@@ -15,20 +14,27 @@ class ListComments extends Component {
   }
 
   componentDidMount() {
-    // if (this.props.match.params.postId) {
-    //   const postId = this.props.match.params.postId
-    //   this.props.dispatch(fetchPostComments(postId))
-    // }
+    this.props.dispatch(fetchPostComments(this.props.parentId))
   }
+
+  voteSort = (a, b) => {
+    return b.voteScore - a.voteScore
+  }
+
+ dateSort = (a, b) => {
+   if (a.timestamp - b.timestamp  === 0 ) {
+        return a
+      } else {
+        return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
+    }
+  }
+
 
   render() {
 
     const { comments } = this.props
 
-    console.log("List Comments this.props :", this.props)
-
     return (
-
       <div>
         <Grid style={{paddingBottom:'20'}}>
           <Row>
@@ -48,7 +54,7 @@ class ListComments extends Component {
         </Grid>
 
         <Grid className="card-list">
-          {this.props.comments.map( comment =>
+          {comments.sort(this.state.sortBy).map(comment =>
             <Row className="card" key={comment.id}>
               <Col xs={2} className="card-grid">
                 <div className="content voting">

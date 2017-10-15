@@ -8,16 +8,6 @@ export const formatDate = (item) => {
   }
 }
 
-export const voteSort = (a, b) => {
-  return b.voteScore - a.voteScore
-}
 
-export const dateSort = (a, b) => {
-  if (a.timestamp - b.timestamp  === 0 ) {
-    return a
-  } else {
-    return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
-  }
-}
 
 

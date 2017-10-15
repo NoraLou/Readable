@@ -80,7 +80,8 @@ export const deletePost = (id) => {
 export const getPost = (id) => {
   console.log("inside API with id :", id)
   return fetch(`${URL}posts/${id}`, {...headers})
-  .then( data => data.json())
+    .then( data => data.json())
+    // .then( data => addCommentCount(data))
   .catch((error) => {
     console.log(`Error : ${error}`)
   })

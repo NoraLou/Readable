@@ -89,6 +89,8 @@ class PostDetail extends Component {
             </Col>
           </Row>
         </Grid>
+
+        <ListComments parentId={postId}/>
       </div>
     )
   }
