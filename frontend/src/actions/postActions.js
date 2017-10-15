@@ -33,6 +33,7 @@ function receivePost( post ) {
 }
 
 export function getPost( postId ) {
+  console.log("calling getPost")
   return dispatch=> {
     return PostAPI.getPost( postId )
       .then( json => {

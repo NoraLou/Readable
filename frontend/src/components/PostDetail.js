@@ -10,6 +10,8 @@ import ListComments  from './ListComments'
 
 class PostDetail extends Component {
 
+
+
   componentDidMount() {
     if (this.props.match.params.postId) {
       const postId = this.props.match.params.postId
@@ -69,7 +71,7 @@ class PostDetail extends Component {
                 </Col>
                 <Col xs={12} sm={4}>
                   <div className="edit-controls">
-                    <a href="/new">Edit</a>
+                    <Link to={`/edit/${post.id}`}><a href="/new">Edit</a></Link>
                     <a>Delete</a>
                   </div>
                 </Col>

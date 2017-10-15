@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Col, Button, Row, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { postAddPost } from '../actions/postActions'
+import { postAddPost, getPost } from '../actions/postActions'
 
 
 const defaultNewState = {
@@ -14,11 +14,40 @@ const defaultNewState = {
   isSubmitted: false
 }
 
-class NewPost extends Component {
+class FormPost extends Component {
 
   state = {
     ...defaultNewState
   }
+
+  componentDidMount() {
+    console.log("calling componentDidMount")
+    if (this.props.match.params.postId) {
+      this.setState({type:'editPost'})
+      const { postId } = this.props.match.params
+      const { posts, dispatch } = this.props
+      if ( !(Object.keys(posts).length == 1) && !(Object.keys(posts)[0] === postId)) {
+        dispatch(getPost(postId))
+      }
+    }
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    if ((nextProps.posts !== this.props.posts) && (nextProps.match.params.postId == this.props.match.params.postId)) {
+      const {posts} = this.props
+      console.log("this.props :", this.props)
+      console.log("posts :", posts)
+      const {postId} = this.props.match.params
+      console.log("postId :", postId)
+      const post = posts[postId]
+      console.log ("componentWillReceiveProps post :", post)
+      this.setState({
+        ...post
+      })
+    }
+  }
+
+
 
   resetForm = (e) => {
     this.setState({ ...defaultNewState })
@@ -54,7 +83,6 @@ class NewPost extends Component {
     }
   }
 
-
   handleAlertDismiss = (e) => {
     this.setState({
      formValid: true,
@@ -67,6 +95,18 @@ class NewPost extends Component {
   }
 
   render() {
+
+    // const { posts } = this.props
+    // console.log('this.props ', this.props )
+
+    // if ((this.state.type === "editPost") && (posts.length)) {
+    //   const toEdit = posts[Object.keys(posts)[0]]
+    //   console.log("toEdit :", toEdit)
+    //   this.setState({
+    //     ...toEdit
+    //   })
+    // }
+
 
     return (
       <div className="container" style={{paddingTop: 60}}>
@@ -162,12 +202,13 @@ class NewPost extends Component {
   }
 }
 
-function mapStateToProps( { categories} ) {
+function mapStateToProps( { categories, posts} ) {
   return {
-    categories
+    categories,
+    posts
   }
 }
 
 
-export default connect(mapStateToProps)(NewPost)
+export default connect(mapStateToProps)(FormPost)
 
