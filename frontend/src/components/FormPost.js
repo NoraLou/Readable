@@ -21,13 +21,16 @@ class FormPost extends Component {
   }
 
   componentDidMount() {
-    console.log("calling componentDidMount")
     if (this.props.match.params.postId) {
-      this.setState({type:'editPost'})
       const { postId } = this.props.match.params
       const { posts, dispatch } = this.props
       if ( !(Object.keys(posts).length == 1) && !(Object.keys(posts)[0] === postId)) {
         dispatch(getPost(postId))
+      }else{
+        const editPost = posts[postId]
+        this.setState({
+          ...editPost
+        })
       }
     }
   }
@@ -35,19 +38,13 @@ class FormPost extends Component {
   componentWillReceiveProps( nextProps ) {
     if ((nextProps.posts !== this.props.posts) && (nextProps.match.params.postId == this.props.match.params.postId)) {
       const {posts} = this.props
-      console.log("this.props :", this.props)
-      console.log("posts :", posts)
       const {postId} = this.props.match.params
-      console.log("postId :", postId)
       const post = posts[postId]
-      console.log ("componentWillReceiveProps post :", post)
       this.setState({
         ...post
       })
     }
   }
-
-
 
   resetForm = (e) => {
     this.setState({ ...defaultNewState })
@@ -95,18 +92,6 @@ class FormPost extends Component {
   }
 
   render() {
-
-    // const { posts } = this.props
-    // console.log('this.props ', this.props )
-
-    // if ((this.state.type === "editPost") && (posts.length)) {
-    //   const toEdit = posts[Object.keys(posts)[0]]
-    //   console.log("toEdit :", toEdit)
-    //   this.setState({
-    //     ...toEdit
-    //   })
-    // }
-
 
     return (
       <div className="container" style={{paddingTop: 60}}>
@@ -195,7 +180,6 @@ class FormPost extends Component {
             <Col xs={6}>
             </Col>
           </Row>
-
         </form>
       </div>
     )

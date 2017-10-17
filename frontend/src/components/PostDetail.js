@@ -11,7 +11,6 @@ import ListComments  from './ListComments'
 class PostDetail extends Component {
 
 
-
   componentDidMount() {
     if (this.props.match.params.postId) {
       const postId = this.props.match.params.postId
