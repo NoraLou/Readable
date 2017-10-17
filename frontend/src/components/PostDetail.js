@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import { Grid, Row, Col, Button } from 'react-bootstrap'
+import { Grid, Row, Col, Button, Modal} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { getPost } from '../actions/postActions'
 import { connect } from 'react-redux'
 import ListComments  from './ListComments'
+import FormPost from './FormPost'
+//import Modal from 'react-modal'
 
 
 class PostDetail extends Component {
 
+  constructor(props) {
+    super(props);
+    this.closeModal = this.closeModal.bind(this)
+    this.openModal = this.openModal.bind(this)
+  }
+
+  state = {
+    showModal: false
+  }
 
   componentDidMount() {
     if (this.props.match.params.postId) {
@@ -26,8 +37,15 @@ class PostDetail extends Component {
 
   }
 
-  render() {
+  closeModal() {
+    this.setState({ showModal: false });
+  }
 
+  openModal() {
+    this.setState({ showModal: true });
+  }
+
+  render() {
     const { posts , comments } = this.props
     const { postId } = this.props.match.params
     let commentCount = Object.keys(comments).length
@@ -70,7 +88,7 @@ class PostDetail extends Component {
                 </Col>
                 <Col xs={12} sm={4}>
                   <div className="edit-controls">
-                    <Link to={`/edit/${post.id}`}><a href="/new">Edit</a></Link>
+                    <a onClick ={()=> this.setState({ showModal : true }) }> Edit </a>
                     <a>Delete</a>
                   </div>
                 </Col>
@@ -93,6 +111,15 @@ class PostDetail extends Component {
         </Grid>
 
         <ListComments parentId={postId}/>
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <FormPost edit post={post}/>
+          <Modal.Footer>
+            <Button onClick={this.closeModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }

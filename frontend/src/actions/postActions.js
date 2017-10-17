@@ -6,7 +6,7 @@ export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_POST_VOTE = 'RECEIVE_POST_VOTE'
 
 // export const DELETE_POST = 'DELETE_POST'
-// export const EDIT_POST = 'EDIT_POST'
+export const RECEIVE_POST_EDIT = 'RECEIVE_POST_EDIT'
 export const VOTE_POST = 'VOTE_POST'
 
 
@@ -31,12 +31,30 @@ function receivePost( post ) {
     post: formatDate(post)
   }
 }
-
 export function getPost( postId ) {
-  console.log("calling getPost")
   return dispatch=> {
     return PostAPI.getPost( postId )
       .then( json => {
+        return dispatch(receivePost(json))
+      })
+  }
+}
+
+
+
+function receivePostEdit( post ) {
+  return {
+    type: RECEIVE_POST_EDIT,
+    post: post
+  }
+}
+
+export function editPost (id, title, body ) {
+  console.log( `id ${id}, title ${title}, body ${body}`)
+  return dispatch => {
+    return PostAPI.editPost(id, title, body)
+      .then(json => {
+        console.log("PostAPI editPost json :", json)
         return dispatch(receivePost(json))
       })
   }

@@ -103,10 +103,6 @@ html, body {
   padding-bottom: 12px;
 }
 
-/*.post-item-detail .edit-controls a {
-  padding-right: 15px;
-}*/
-
 .post-item-detail .content.voting {
   border-right: none;
   height: 120px;
@@ -121,7 +117,17 @@ html, body {
   margin: 0;
 }
 
+/*****************
+* Modal
+*******************/
+.modal-dialog {
+  max-width: 900px;
+}
 
-
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 100%;
+  }
+}
 
 

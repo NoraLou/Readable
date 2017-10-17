@@ -78,7 +78,6 @@ export const deletePost = (id) => {
 }
 
 export const getPost = (id) => {
-  console.log("inside API with id :", id)
   return fetch(`${URL}posts/${id}`, {...headers})
     .then( data => data.json())
     // .then( data => addCommentCount(data))
@@ -99,14 +98,17 @@ export const votePost = (id, option) => {
 }
 
 
-export const editPost = (id, title, string) => {
+export const editPost = (id, title, body) => {
   const request = {
     ...putMethod,
     ...headers,
-    body: JSON.stringify({ title, string })
+    body: JSON.stringify({ title, body})
   }
   return fetch(`${URL}posts/${id}`, request)
     .then( res => res.json())
+    .catch((error) => {
+      console.log(`Error : ${error}`)
+    })
 }
 
 

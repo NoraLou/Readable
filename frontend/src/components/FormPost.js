@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Col, Button, Row, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { postAddPost, getPost } from '../actions/postActions'
+import { postAddPost, getPost, editPost } from '../actions/postActions'
 
 
 const defaultNewState = {
@@ -10,7 +10,7 @@ const defaultNewState = {
   category:'none selected',
   body:'',
   formValid: true,
-  type:'newPost',
+  isEdit: false,
   isSubmitted: false
 }
 
@@ -21,27 +21,10 @@ class FormPost extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.postId) {
-      const { postId } = this.props.match.params
-      const { posts, dispatch } = this.props
-      if ( !(Object.keys(posts).length == 1) && !(Object.keys(posts)[0] === postId)) {
-        dispatch(getPost(postId))
-      }else{
-        const editPost = posts[postId]
-        this.setState({
-          ...editPost
-        })
-      }
-    }
-  }
-
-  componentWillReceiveProps( nextProps ) {
-    if ((nextProps.posts !== this.props.posts) && (nextProps.match.params.postId == this.props.match.params.postId)) {
-      const {posts} = this.props
-      const {postId} = this.props.match.params
-      const post = posts[postId]
+    if (this.props.post) {
       this.setState({
-        ...post
+        ...this.props.post,
+        isEdit: true
       })
     }
   }
@@ -64,14 +47,21 @@ class FormPost extends Component {
   }
 
   submitPost = (e) => {
-    const { title, author, body, category } = this.state
+    const { title, author, body, category, isEdit} = this.state
     const { dispatch } = this.props
+
     if(this.isValid({ title, author, body, category})) {
       this.setState({
         ...defaultNewState,
         isSubmitted:true
       })
-      dispatch(postAddPost({ title, author, body, category }))
+
+      if (isEdit) {
+        dispatch(editPost ( this.props.post.id, title, body) )
+      } else {
+        dispatch(postAddPost({ title, author, body, category }))
+      }
+
     } else {
       this.setState({
         formValid:false,
@@ -109,28 +99,34 @@ class FormPost extends Component {
         )}
 
         <form>
-          <FormGroup
-            controlId="readable-title">
-            <ControlLabel>Title</ControlLabel>
-            <FormControl
-              name="title"
-              value={this.state.title}
-              type="text"
-              placeholder="Enter Post Title"
-              onChange={this.fieldChange}/>
-          </FormGroup>
-
-          <FormGroup
-            controlId="readable-post-body">
-            <ControlLabel>Body</ControlLabel>
-
-            <FormControl
-              name="body"
-              componentClass="textarea"
-              placeholder="Enter Post Body"
-              value={this.state.body}
-              onChange={this.fieldChange}/>
-          </FormGroup>
+          <Row>
+            <Col xs={12}>
+              <FormGroup
+                controlId="readable-title">
+                <ControlLabel>Title</ControlLabel>
+                <FormControl
+                  name="title"
+                  value={this.state.title}
+                  type="text"
+                  placeholder="Enter Post Title"
+                  onChange={this.fieldChange}/>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <FormGroup
+                controlId="readable-post-body">
+                <ControlLabel>Body</ControlLabel>
+                <FormControl
+                  name="body"
+                  componentClass="textarea"
+                  placeholder="Enter Post Body"
+                  value={this.state.body}
+                  onChange={this.fieldChange}/>
+              </FormGroup>
+            </Col>
+          </Row>
 
           <Row>
             <Col xs={12} sm={6}>
@@ -142,7 +138,7 @@ class FormPost extends Component {
                   type="text"
                   name="author"
                   placeholder="Authored by"
-                  readOnly={false}
+                  readOnly={this.state.isEdit}
                   value={this.state.author}
                   onChange={this.fieldChange}/>
               </FormGroup>
@@ -154,6 +150,7 @@ class FormPost extends Component {
                 <ControlLabel>Select Category</ControlLabel>
 
                 <FormControl
+                  readOnly={this.state.isEdit}
                   label="category"
                   componentClass="select"
                   value={this.state.category}

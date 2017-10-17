@@ -3,7 +3,8 @@ import { combineReducers } from 'redux'
 import {
   RECEIVE_POSTS,
   RECEIVE_POST,
-  RECEIVE_POST_VOTE
+  RECEIVE_POST_VOTE,
+  RECEIVE_POST_EDIT,
 } from '../actions/postActions'
 
 import {
@@ -27,10 +28,12 @@ function posts( state={}, action) {
       }
 
     case RECEIVE_POST:
+      console.log("RECEIVE POST ACTION :", action)
       return {
         ...state,
         [action.post.id]:action.post
       }
+
     case RECEIVE_POST_VOTE:
       return  {
         ...state,
