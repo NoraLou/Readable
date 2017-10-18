@@ -4,8 +4,7 @@ import { formatDate } from '../utils/helpers'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_POST_VOTE = 'RECEIVE_POST_VOTE'
-
-// export const DELETE_POST = 'DELETE_POST'
+export const DELETE_POST = 'DELETE_POST'
 export const RECEIVE_POST_EDIT = 'RECEIVE_POST_EDIT'
 export const VOTE_POST = 'VOTE_POST'
 
@@ -54,7 +53,6 @@ export function editPost (id, title, body ) {
   return dispatch => {
     return PostAPI.editPost(id, title, body)
       .then(json => {
-        console.log("PostAPI editPost json :", json)
         return dispatch(receivePost(json))
       })
   }
@@ -92,5 +90,21 @@ export function postAddPost(post) {
       })
   }
 }
+
+function deletePost(id) {
+  return {
+    type: DELETE_POST,
+    id
+  }
+}
+export function deletePost (id) {
+  console.log("api call with id :", id)
+  return dispatch => {
+    return PostAPI.deletePost(id)
+    .then(() => dispatch(deletePost(id))
+    )
+  }
+}
+
 
 

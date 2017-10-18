@@ -55,8 +55,6 @@ class Home extends Component {
 
     const { posts, categories, match } = this.props
 
-    console.log("posts :", posts)
-
     return (
       <div>
         <nav className="main-nav" >

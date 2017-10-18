@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import { Grid, Row, Col, Button, Modal} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { getPost } from '../actions/postActions'
+import { Grid, Row, Col, Button, Modal, Alert} from 'react-bootstrap'
+import { Link, Redirect } from 'react-router-dom'
+import { getPost, deletePost } from '../actions/postActions'
 import { connect } from 'react-redux'
 import ListComments  from './ListComments'
 import FormPost from './FormPost'
-//import Modal from 'react-modal'
 
 
 class PostDetail extends Component {
@@ -19,7 +18,8 @@ class PostDetail extends Component {
   }
 
   state = {
-    showModal: false
+    showModal: false,
+    setDelete: false
   }
 
   componentDidMount() {
@@ -34,7 +34,21 @@ class PostDetail extends Component {
       const newId = nextProps.match.params.postId
       this.props.newId(getPost(newId))
     }
+  }
 
+  handleAlertDismiss = (e) => {
+
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault()
+    console.log("handleDelete!")
+    const postId = this.props.match.params.postId
+    console.log("postId :",  postId)
+    if ( postId ) {
+      this.props.dispatch(deletePost(postId))
+      this.setState(() => ({ setDelete: true }))
+    }
   }
 
   closeModal() {
@@ -46,6 +60,7 @@ class PostDetail extends Component {
   }
 
   render() {
+
     const { posts , comments } = this.props
     const { postId } = this.props.match.params
     let commentCount = Object.keys(comments).length
@@ -67,6 +82,11 @@ class PostDetail extends Component {
         </nav>
 
         <Grid className="post-item-detail">
+
+          { ( this.state.setDelete || post.deleted ) &&
+            <Redirect to='/'/>
+          }
+
           <Row className="card">
             <Col xs={2} className="card-grid-item">
               <div className="content voting" >
@@ -89,7 +109,7 @@ class PostDetail extends Component {
                 <Col xs={12} sm={4}>
                   <div className="edit-controls">
                     <a onClick ={()=> this.setState({ showModal : true }) }> Edit </a>
-                    <a>Delete</a>
+                    <a onClick={this.handleDelete}>Delete</a>
                   </div>
                 </Col>
                </Row>

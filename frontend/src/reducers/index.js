@@ -5,6 +5,7 @@ import {
   RECEIVE_POST,
   RECEIVE_POST_VOTE,
   RECEIVE_POST_EDIT,
+  DELETE_POST
 } from '../actions/postActions'
 
 import {
@@ -28,7 +29,6 @@ function posts( state={}, action) {
       }
 
     case RECEIVE_POST:
-      console.log("RECEIVE POST ACTION :", action)
       return {
         ...state,
         [action.post.id]:action.post
@@ -39,7 +39,12 @@ function posts( state={}, action) {
         ...state,
         [action.post.id]:action.post
       }
-
+    case DELETE_POST:
+      console.log("DELETE_POST action:", action)
+      return {
+        ...state
+        [action.id] = null
+      }
     default:
       return state
   }
