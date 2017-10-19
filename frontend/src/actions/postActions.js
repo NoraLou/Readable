@@ -58,6 +58,7 @@ export function editPost (id, title, body ) {
 
 
 function receiveVoteChange( post ){
+  console.log
   return {
     type: RECEIVE_POST_VOTE,
     post

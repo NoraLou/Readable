@@ -35,11 +35,13 @@ function posts( state={}, action) {
         ...state,
         [action.post.id]:action.post
       }
-
     case RECEIVE_POST_VOTE:
       return  {
         ...state,
-        [action.post.id]:action.post
+        [action.post.id]: {
+          ...state[action.post.id],
+          ['voteScore'] : action.post.voteScore
+        }
       }
     case DELETE_POST:
       const postsWithDelete = {...state}
