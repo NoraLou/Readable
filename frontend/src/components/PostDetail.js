@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import { Grid, Row, Col, Button, Modal, Alert} from 'react-bootstrap'
-import { Link, Redirect } from 'react-router-dom'
+import { Grid, Row, Col, Button, Modal} from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 import { getPost, deletePost, postVoteChange } from '../actions/postActions'
 import { connect } from 'react-redux'
 import ListComments  from './ListComments'
@@ -74,16 +74,6 @@ class PostDetail extends Component {
     return (
 
       <div>
-        <nav className="main-nav">
-          <Grid>
-            <Row>
-              <Col xs={12} sm={4}>
-                <h1>Readable</h1>
-              </Col>
-            </Row>
-          </Grid>
-        </nav>
-
         <Grid className="post-item-detail">
 
           { ( this.state.setDelete || post.deleted ) &&

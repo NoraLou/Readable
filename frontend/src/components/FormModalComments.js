@@ -103,12 +103,16 @@ class FormModalComments extends Component {
 
   render () {
 
-    const { showModal , closeModal } = this.props
+    const { showModal , closeModal, inEdit } = this.props
 
     return (
         <Modal show={showModal} onHide={closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Comment</Modal.Title>
+            <Modal.Title className="text-center">
+              { inEdit === false
+                ? <h4>Add Comment</h4>
+                : <h4>Edit Comment</h4> }
+            </Modal.Title>
           </Modal.Header>
           <div className="container" style={{paddingTop: 60}}>
             {( !this.state.isValid && this.state.isSubmitted) && (

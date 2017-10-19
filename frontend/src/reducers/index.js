@@ -4,7 +4,6 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   RECEIVE_POST_VOTE,
-  RECEIVE_POST_EDIT,
   DELETE_POST
 } from '../actions/postActions'
 

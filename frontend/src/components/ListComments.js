@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col, Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { fetchPostComments, deletePostComment, addComment, postVoteChange } from '../actions/commentActions'
+import { fetchPostComments, deletePostComment, postVoteChange } from '../actions/commentActions'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import { Link } from 'react-router-dom'
 import FormModalComments from './FormModalComments'
 
 
@@ -42,7 +41,7 @@ class ListComments extends Component {
     this.props.dispatch(postVoteChange(id, "downVote"))
   }
 
-  voteSort = (a, b) => {
+  voteSort(a, b){
     return b.voteScore - a.voteScore
   }
 
@@ -64,11 +63,11 @@ class ListComments extends Component {
     }))
   }
 
-  dateSort = (a, b) => {
+  dateSort(a, b){
     if (a.timestamp - b.timestamp  === 0 ) {
         return a
       } else {
-        return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
+        return a.timestamp > b.timestamp ? -1 : 1
     }
   }
 
@@ -78,7 +77,7 @@ class ListComments extends Component {
 
     return (
       <div>
-        <Grid style={{paddingBottom:'20'}}>
+        <Grid className="list-actions">
           <Row>
             <Col xs={6}>
               <div>SORT BY :</div>

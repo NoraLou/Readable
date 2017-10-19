@@ -5,7 +5,6 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_POST_VOTE = 'RECEIVE_POST_VOTE'
 export const DELETE_POST = 'DELETE_POST'
-export const RECEIVE_POST_EDIT = 'RECEIVE_POST_EDIT'
 export const VOTE_POST = 'VOTE_POST'
 
 
@@ -40,13 +39,6 @@ export function getPost( postId ) {
 }
 
 
-
-function receivePostEdit( post ) {
-  return {
-    type: RECEIVE_POST_EDIT,
-    post: post
-  }
-}
 export function editPost (id, title, body ) {
   return dispatch => {
     return PostAPI.editPost(id, title, body)

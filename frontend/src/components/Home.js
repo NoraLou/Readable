@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import MdChatBubbleOutline from 'react-icons/lib/md/chat-bubble-outline'
 import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { fetchAllPosts, postVoteChange } from '../actions/postActions'
@@ -31,15 +30,15 @@ class Home extends Component {
       }
     }
 
-    voteSort = (a, b) => {
+    voteSort(a, b){
       return b.voteScore - a.voteScore
     }
 
-    dateSort = (a, b) => {
+    dateSort(a, b){
       if (a.timestamp - b.timestamp  === 0 ) {
         return a
       } else {
-        return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
+        return a.timestamp > b.timestamp ? -1 : 1
       }
     }
 
@@ -53,30 +52,22 @@ class Home extends Component {
 
   render() {
 
-    const { posts, categories, match } = this.props
+    const { posts, categories } = this.props
 
     return (
       <div>
-        <nav className="main-nav" >
-          <Grid>
-            <Row>
-              <Col xs={12} sm={4}>
-                <h1>Readable</h1>
-              </Col>
-              <Col xs={12} sm={8}>
-                <div className='category-buttons pull-right'>
-                  {categories.map((cat, idx) =>
-                    <Link key={idx} to={cat.path}>
-                      <Button>{cat.name}</Button>
-                    </Link>
-                  )}
-                </div>
-              </Col>
-            </Row>
-          </Grid>
-        </nav>
-
-        <Grid style={{paddingBottom:'20'}}>
+        <Grid className="list-actions">
+          <Row>
+            <Col xs={12}>
+              <div className='category-buttons pull-right'>
+                {categories.map((cat, idx) =>
+                  <Link key={idx} to={cat.path}>
+                    <Button>{cat.name}</Button>
+                  </Link>
+                )}
+              </div>
+            </Col>
+          </Row>
           <Row>
             <Col xs={6}>
               <div>SORT BY :</div>
@@ -117,7 +108,7 @@ class Home extends Component {
                     </Link>
                   </Col>
                 </Row>
-                <Col xs={12}>
+                <Col xs={12} className="card-details">
                   <span>{post.formattedDate}</span><span>{post.author}</span><span className="pull-right">Comments :{post.commentCount}</span>
                   <p>{post.body}</p>
                 </Col>

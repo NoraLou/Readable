@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Link } from 'react-router-dom'
 import Home from './Home';
 import FormPost from './FormPost'
 import PostDetail from './PostDetail'
@@ -17,8 +17,12 @@ class App extends Component {
   render() {
 
     return (
-
         <div className="App">
+          <nav className="main-nav" >
+            <div className="container">
+              <Link to="/"><h1>Readable</h1></Link>
+            </div>
+          </nav>
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/new" component={FormPost}/>
