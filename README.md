@@ -1,8 +1,7 @@
 # Readable
 
 This repo contains code for Udacity's out of class project for the React nanodegree program part 2: React and Redux
-It is a s Hacker News / Reddit type of New posting and comment application wiht state managed by Redux.
-The api-server 'backend' of the project was provided by Udacity.
+The api-server 'backend' of the project was provided by Udacity.  It contains a seperate README.md file and needs to be run in a seperate terminal to provide data end points to the front-end.
 
 ### Getting Started
 
