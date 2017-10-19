@@ -116,12 +116,6 @@ class Home extends Component {
                       <h4>{post.title}</h4>
                     </Link>
                   </Col>
-                  <Col xs={4}>
-                    <h5 className="edit-controls text-right">
-                      <a href="/new">Edit</a>
-                      <a>Delete</a>
-                    </h5>
-                  </Col>
                 </Row>
                 <Col xs={12}>
                   <span>{post.formattedDate}</span><span>{post.author}</span><span className="pull-right">Comments :{post.commentCount}</span>

@@ -85,7 +85,6 @@ function comments( state={}, action ) {
       }
 
     case RECEIVE_COMMENT:
-      console.log("RECEIVE_COMMENT :",action)
       return {
         ...state,
         [action.comment.id]: action.comment

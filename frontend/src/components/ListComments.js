@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col, Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { fetchPostComments, deletePostComment, addComment } from '../actions/commentActions'
+import { fetchPostComments, deletePostComment, addComment, postVoteChange } from '../actions/commentActions'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import { Link } from 'react-router-dom'
@@ -34,6 +34,13 @@ class ListComments extends Component {
     this.setState( ()=> ({showCommentModal : false}))
   }
 
+  upVote = (id) => {
+    this.props.dispatch(postVoteChange(id, "upVote"))
+  }
+
+  downVote = (id) => {
+    this.props.dispatch(postVoteChange(id, "downVote"))
+  }
 
   voteSort = (a, b) => {
     return b.voteScore - a.voteScore
@@ -92,11 +99,11 @@ class ListComments extends Component {
               <Col xs={2} className="card-grid">
                 <div className="content voting">
                   <div>
-                    <span className="icon-wrap">
+                    <span className="icon-wrap" onClick={()=> {this.upVote(comment.id)}}>
                       <MdThumbUp size={25}/>
                     </span>
                       <div>{comment.voteScore}</div>
-                    <span className="icon-wrap">
+                    <span className="icon-wrap" onClick={()=> {this.downVote(comment.id)}} >
                       <MdThumbDown size={25}/>
                     </span>
                   </div>

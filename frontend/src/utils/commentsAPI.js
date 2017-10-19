@@ -54,8 +54,6 @@ export const addComment = (comment) => {
 }
 
 
-
-
 export const editComment = (id, body) => {
   const timestamp = Date.now()
   const request = {
@@ -70,122 +68,13 @@ export const editComment = (id, body) => {
     })
  }
 
-// export function updateComment (comment) {
-//   return fetch(
-//     'http://localhost:3001/comments/' + comment.id, {method: 'put', body: JSON.stringify(comment), headers: { 'Authorization': 'Readable', 'Content-Type': 'application/json'}})
-//     .then((res) => res.json())
-// }
 
- //    PUT /comments/:id
- //      USAGE:
- //        Edit the details of an existing comment
-
- //      PARAMS:
- //        timestamp: timestamp. Get this however you want.
- //        body: String
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const votePost = (id, option) => {
-//   const request = {
-//     ...postMethod,
-//     ...headers,
-//     body: JSON.stringify({ option })
-//   }
-//   return fetch(`${URL}posts/${id}`, request)
-//     .then( res => res.json())
-// }
-
-
-// export const editPost = (id, title, body) => {
-//   const request = {
-//     ...putMethod,
-//     ...headers,
-//     body: JSON.stringify({ title, body})
-//   }
-//   return fetch(`${URL}posts/${id}`, request)
-//     .then( res => res.json())
-//     .catch((error) => {
-//       console.log(`Error : ${error}`)
-//     })
-// }
-
-
-// export const addPost = (post) => {
-//   const id = v4();
-//   const timestamp = Date.now();
-//   post = {
-//     ...post,
-//     id,
-//     timestamp
-//   }
-//   return fetch( `${URL}posts`, {
-//       ...postMethod,
-//       ...headers,
-//       body: JSON.stringify({...post}),
-//     })
-//     .then( res => res.json())
-//     .catch((error) => {
-//       console.log(`Error : ${error}`)
-//     })
-// }
-
-
-
-
-    // GET /posts/:id/comments
-    //   USAGE:
-    //     Get all the comments for a single post
-
- //    POST /comments
- //      USAGE:
- //        Add a comment to a post
-
- //      PARAMS:
- //        id: Any unique ID. As with posts, UUID is probably the best here.
- //        timestamp: timestamp. Get this however you want.
- //        body: String
- //        author: String
- //        parentId: Should match a post id in the database.
-
- //    GET /comments/:id
- //      USAGE:
- //        Get the details for a single comment
-
- //    POST /comments/:id
- //      USAGE:
- //        Used for voting on a comment.
-
- //    PUT /comments/:id
- //      USAGE:
- //        Edit the details of an existing comment
-
- //      PARAMS:
- //        timestamp: timestamp. Get this however you want.
- //        body: String
-
- //    DELETE /comments/:id
- //      USAGE:
- //        Sets a comment's deleted flag to 'true'
- //
+export const voteComment = (id, option) => {
+  const request = {
+    ...postMethod,
+    ...headers,
+    body: JSON.stringify({ option })
+  }
+  return fetch(`${URL}comments/${id}`, request)
+    .then( res => res.json())
+}

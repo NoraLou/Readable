@@ -57,4 +57,11 @@ export function editComment( id, body ) {
       dispatch(receiveComment(json)))
   }
 }
-
+export function postVoteChange( id, option ){
+  return dispatch => {
+    return CommentsAPI.voteComment(id, option)
+      .then(json => {
+        return dispatch(receiveComment(json))
+      })
+  }
+}

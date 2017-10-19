@@ -3,7 +3,7 @@ import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import { Grid, Row, Col, Button, Modal, Alert} from 'react-bootstrap'
 import { Link, Redirect } from 'react-router-dom'
-import { getPost, deletePost } from '../actions/postActions'
+import { getPost, deletePost, postVoteChange } from '../actions/postActions'
 import { connect } from 'react-redux'
 import ListComments  from './ListComments'
 import FormPost from './FormPost'
@@ -36,10 +36,6 @@ class PostDetail extends Component {
     }
   }
 
-  handleAlertDismiss = (e) => {
-
-  }
-
   handlePostDelete = (e) => {
     e.preventDefault()
     const postId = this.props.match.params.postId
@@ -48,6 +44,15 @@ class PostDetail extends Component {
       this.setState(() => ({ setDelete: true }))
     }
   }
+
+  upVote = (id) => {
+    this.props.dispatch(postVoteChange(id, "upVote"))
+  }
+
+  downVote = (id) => {
+    this.props.dispatch(postVoteChange(id, "downVote"))
+  }
+
 
   closeModal() {
     this.setState({ showModal: false });
@@ -89,13 +94,13 @@ class PostDetail extends Component {
             <Col xs={2} className="card-grid-item">
               <div className="content voting" >
                 <div>
-                  <span className="icon-wrap">
-                    <MdThumbUp size={25}/>
-                  </span>
-                    <div>25</div>
-                  <span className="icon-wrap">
-                    <MdThumbDown size={25}/>
-                  </span>
+                    <span className="icon-wrap" onClick={()=> {this.upVote(post.id)}}>
+                      <MdThumbUp size={25}/>
+                    </span>
+                      <div>{post.voteScore}</div>
+                    <span className="icon-wrap" onClick={()=> {this.downVote(post.id)}}>
+                      <MdThumbDown size={25}/>
+                    </span>
                 </div>
               </div>
             </Col>
