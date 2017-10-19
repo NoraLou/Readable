@@ -11,7 +11,7 @@ import {
 import {
   RECEIVE_POST_COMMENTS,
   DELETE_POST_COMMENT,
-  RECEIVE_ADDED_COMMENT,
+  RECEIVE_COMMENT,
 } from '../actions/commentActions'
 
 import { RECEIVE_CATEGORIES } from '../actions/categoryActions'
@@ -84,7 +84,8 @@ function comments( state={}, action ) {
         ...commentsWithDelete
       }
 
-    case RECEIVE_ADDED_COMMENT:
+    case RECEIVE_COMMENT:
+      console.log("RECEIVE_COMMENT :",action)
       return {
         ...state,
         [action.comment.id]: action.comment

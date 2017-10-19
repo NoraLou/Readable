@@ -5,33 +5,35 @@ import { fetchPostComments, deletePostComment, addComment } from '../actions/com
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import { Link } from 'react-router-dom'
-import FormComments from './FormComments'
+import FormModalComments from './FormModalComments'
 
 
 class ListComments extends Component {
 
   constructor(props) {
     super(props);
-    this.closeCommentsModal = this.closeCommentsModal.bind(this)
-    this.openCommentsModal = this.openCommentsModal.bind(this)
+    this.closeCommentModal = this.closeCommentModal.bind(this)
+    this.openCommentModal = this.openCommentModal.bind(this)
   }
 
   state = {
     sortBy : this.voteSort,
-    showCommentsModal: false
+    showCommentModal: false,
+    inEdit: false,
   }
 
   componentDidMount() {
     this.props.dispatch(fetchPostComments(this.props.parentId))
   }
 
-  openCommentsModal = () => {
-    this.setState( ()=> ({showCommentsModal : true}))
+  openCommentModal = () => {
+    this.setState( ()=> ({showCommentModal : true}))
   }
 
-  closeCommentsModal = () => {
-    this.setState( ()=> ({showCommentsModal : false}))
+  closeCommentModal = () => {
+    this.setState( ()=> ({showCommentModal : false}))
   }
+
 
   voteSort = (a, b) => {
     return b.voteScore - a.voteScore
@@ -39,6 +41,20 @@ class ListComments extends Component {
 
   handleCommentDelete = (id) => {
     this.props.dispatch(deletePostComment(id))
+  }
+
+  handleNewComment = () => {
+    this.setState(()=>({
+      inEdit: false,
+      showCommentModal: true
+    }))
+  }
+
+  handleCommentEdit = (comment) => {
+    this.setState(()=>({
+      inEdit: comment,
+      showCommentModal: true
+    }))
   }
 
   dateSort = (a, b) => {
@@ -50,6 +66,7 @@ class ListComments extends Component {
   }
 
   render() {
+
     const { comments, parentId } = this.props
 
     return (
@@ -63,7 +80,7 @@ class ListComments extends Component {
             </Col>
             <Col xs={6}>
               <div className="pull-right">
-                <Button onClick={this.openCommentsModal}>NEW COMMENT</Button>
+                <Button onClick={this.handleNewComment}>NEW COMMENT</Button>
               </div>
             </Col>
           </Row>
@@ -92,7 +109,7 @@ class ListComments extends Component {
                   </Col>
                   <Col xs={4}>
                     <h5 className="edit-controls text-right">
-                      <a href="/new">Edit</a>
+                      <a onClick={ ()=>this.handleCommentEdit(comment)}>Edit</a>
                       <a onClick={ ()=>this.handleCommentDelete(comment.id)}>Delete</a>
                     </h5>
                   </Col>
@@ -106,18 +123,8 @@ class ListComments extends Component {
           )}
         </Grid>
 
-        <Modal show={this.state.showModal} onHide={this.closeCommentsModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Comment</Modal.Title>
-          </Modal.Header>
-          <FormComments parentId={parentId}/>
-          <Modal.Footer>
-            <Button onClick={this.closeCommentsModal}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-
+        <FormModalComments inEdit={this.state.inEdit} showModal={this.state.showCommentModal} parentId={parentId} closeModal={this.closeCommentModal} />
       </div>
-
     );
   }
 }
