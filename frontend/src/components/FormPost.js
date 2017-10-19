@@ -77,10 +77,6 @@ class FormPost extends Component {
     })
   }
 
-  handleAlertDismissSuccess = (e) => {
-    this.setState({isSubmitted:false})
-  }
-
   render() {
 
     return (

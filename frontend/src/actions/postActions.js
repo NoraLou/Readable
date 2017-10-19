@@ -47,9 +47,7 @@ function receivePostEdit( post ) {
     post: post
   }
 }
-
 export function editPost (id, title, body ) {
-  console.log( `id ${id}, title ${title}, body ${body}`)
   return dispatch => {
     return PostAPI.editPost(id, title, body)
       .then(json => {
@@ -91,18 +89,16 @@ export function postAddPost(post) {
   }
 }
 
-function deletePost(id) {
+function receiveDeletePost(id) {
   return {
     type: DELETE_POST,
     id
   }
 }
 export function deletePost (id) {
-  console.log("api call with id :", id)
   return dispatch => {
     return PostAPI.deletePost(id)
-    .then(() => dispatch(deletePost(id))
-    )
+    .then(() => dispatch(receiveDeletePost(id)))
   }
 }
 

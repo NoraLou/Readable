@@ -40,11 +40,9 @@ class PostDetail extends Component {
 
   }
 
-  handleDelete = (e) => {
+  handlePostDelete = (e) => {
     e.preventDefault()
-    console.log("handleDelete!")
     const postId = this.props.match.params.postId
-    console.log("postId :",  postId)
     if ( postId ) {
       this.props.dispatch(deletePost(postId))
       this.setState(() => ({ setDelete: true }))
@@ -109,7 +107,7 @@ class PostDetail extends Component {
                 <Col xs={12} sm={4}>
                   <div className="edit-controls">
                     <a onClick ={()=> this.setState({ showModal : true }) }> Edit </a>
-                    <a onClick={this.handleDelete}>Delete</a>
+                    <a onClick={this.handlePostDelete}>Delete</a>
                   </div>
                 </Col>
                </Row>
@@ -131,15 +129,17 @@ class PostDetail extends Component {
         </Grid>
 
         <ListComments parentId={postId}/>
+
         <Modal show={this.state.showModal} onHide={this.closeModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Edit Post</Modal.Title>
           </Modal.Header>
           <FormPost edit post={post}/>
           <Modal.Footer>
             <Button onClick={this.closeModal}>Close</Button>
           </Modal.Footer>
         </Modal>
+
       </div>
     )
   }

@@ -9,7 +9,9 @@ import {
 } from '../actions/postActions'
 
 import {
-  RECEIVE_POST_COMMENTS
+  RECEIVE_POST_COMMENTS,
+  DELETE_POST_COMMENT,
+  RECEIVE_ADDED_COMMENT,
 } from '../actions/commentActions'
 
 import { RECEIVE_CATEGORIES } from '../actions/categoryActions'
@@ -40,10 +42,10 @@ function posts( state={}, action) {
         [action.post.id]:action.post
       }
     case DELETE_POST:
-      console.log("DELETE_POST action:", action)
+      const postsWithDelete = {...state}
+      delete postsWithDelete[action.id]
       return {
-        ...state
-        [action.id] = null
+        ...postsWithDelete
       }
     default:
       return state
@@ -74,6 +76,20 @@ function comments( state={}, action ) {
       return {
         ...comments
       }
+
+    case DELETE_POST_COMMENT:
+      const commentsWithDelete = {...state}
+      delete commentsWithDelete[action.id]
+      return {
+        ...commentsWithDelete
+      }
+
+    case RECEIVE_ADDED_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: action.comment
+      }
+
     default:
       return state
   }

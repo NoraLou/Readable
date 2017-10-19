@@ -1,28 +1,48 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col, Button} from 'react-bootstrap'
+import { Grid, Row, Col, Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { fetchPostComments } from '../actions/commentActions'
+import { fetchPostComments, deletePostComment, addComment } from '../actions/commentActions'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import { Link } from 'react-router-dom'
+import FormComments from './FormComments'
 
 
 class ListComments extends Component {
 
+  constructor(props) {
+    super(props);
+    this.closeCommentsModal = this.closeCommentsModal.bind(this)
+    this.openCommentsModal = this.openCommentsModal.bind(this)
+  }
+
   state = {
-    sortBy : this.voteSort
+    sortBy : this.voteSort,
+    showCommentsModal: false
   }
 
   componentDidMount() {
     this.props.dispatch(fetchPostComments(this.props.parentId))
   }
 
+  openCommentsModal = () => {
+    this.setState( ()=> ({showCommentsModal : true}))
+  }
+
+  closeCommentsModal = () => {
+    this.setState( ()=> ({showCommentsModal : false}))
+  }
+
   voteSort = (a, b) => {
     return b.voteScore - a.voteScore
   }
 
- dateSort = (a, b) => {
-   if (a.timestamp - b.timestamp  === 0 ) {
+  handleCommentDelete = (id) => {
+    this.props.dispatch(deletePostComment(id))
+  }
+
+  dateSort = (a, b) => {
+    if (a.timestamp - b.timestamp  === 0 ) {
         return a
       } else {
         return a.timestamp > b.timestamp ? a.timestamp : b.timestamp
@@ -30,7 +50,8 @@ class ListComments extends Component {
   }
 
   render() {
-    const { comments } = this.props
+    const { comments, parentId } = this.props
+
     return (
       <div>
         <Grid style={{paddingBottom:'20'}}>
@@ -42,17 +63,15 @@ class ListComments extends Component {
             </Col>
             <Col xs={6}>
               <div className="pull-right">
-                <Link to="/new">
-                  <Button>NEW COMMENT</Button>
-                </Link>
+                <Button onClick={this.openCommentsModal}>NEW COMMENT</Button>
               </div>
             </Col>
           </Row>
         </Grid>
 
         <Grid className="card-list">
-          {comments.sort(this.state.sortBy).map(comment =>
-            <Row className="card" key={comment.id}>
+          {comments.sort(this.state.sortBy).map((comment, idx) =>
+            <Row className="card" key={idx}>
               <Col xs={2} className="card-grid">
                 <div className="content voting">
                   <div>
@@ -74,7 +93,7 @@ class ListComments extends Component {
                   <Col xs={4}>
                     <h5 className="edit-controls text-right">
                       <a href="/new">Edit</a>
-                      <a>Delete</a>
+                      <a onClick={ ()=>this.handleCommentDelete(comment.id)}>Delete</a>
                     </h5>
                   </Col>
                 </Row>
@@ -86,6 +105,17 @@ class ListComments extends Component {
             </Row>
           )}
         </Grid>
+
+        <Modal show={this.state.showModal} onHide={this.closeCommentsModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Comment</Modal.Title>
+          </Modal.Header>
+          <FormComments parentId={parentId}/>
+          <Modal.Footer>
+            <Button onClick={this.closeCommentsModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+
       </div>
 
     );

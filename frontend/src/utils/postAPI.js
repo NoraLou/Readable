@@ -66,11 +66,10 @@ export const fetchAllPosts = (category) => {
 
 
 export const deletePost = (id) => {
-  console.log("API with Id :", id)
   return fetch(`${URL}posts/${id}`, {
     ...deleteMethod,
     ...headers,
-    body: JSON.stringify({id})
+    body: JSON.stringify(id)
   })
   .then( res => res.json())
   .catch((error) => {
@@ -81,7 +80,6 @@ export const deletePost = (id) => {
 export const getPost = (id) => {
   return fetch(`${URL}posts/${id}`, {...headers})
     .then( data => data.json())
-    // .then( data => addCommentCount(data))
   .catch((error) => {
     console.log(`Error : ${error}`)
   })
