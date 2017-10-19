@@ -1,6 +1,8 @@
-# myReads
+# Readable
 
-This repo contains code for Udacity's out of class project for the React nanodegree program part 1: React Fundamentals.
+This repo contains code for Udacity's out of class project for the React nanodegree program part 2: React and Redux
+It is a s Hacker News / Reddit type of New posting and comment application wiht state managed by Redux.
+The api-server 'backend' of the project was provided by Udacity.
 
 ### Getting Started
 
@@ -8,6 +10,7 @@ If you do not have Node installed please go to :
 [Nodejs.org](https://nodejs.org/en/) to install it.
 
 ### Installing
+
 Run:
 ```
 npm install
