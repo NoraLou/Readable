@@ -31,9 +31,9 @@ A new browser window will open with the URL pointed to [localhost:3000](http://l
 
 ## Screenshots
 
-![Posts Overview](src/images/Main.png)
-![Posts Detail](src/Post_Detail.png)
-![Comment Modal](src/Comment_Modal.png)
+![Posts Overview](/frontend/src/img/Main.png)
+![Posts Detail](/frontend/src/img/Post_Detail.png)
+![Comment Modal](/frontend/src/img/Comment.png)
 
 
 ### Built With
