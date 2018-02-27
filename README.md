@@ -1,10 +1,10 @@
 # Readable
 
-This repo contains code for Udacity's out of class project for the React nanodegree program part 2: React and Redux
-Its a simple Hacker News style forum platform.
-**Important.** The project uses an API [backend](https://github.com/udacity/reactnd-project-readable-starter) provided by the **Udacity** teachers.
+This repo contains code for Udacity's out of class project for the React nanodegree program part 2: React and Redux.
 
-This app allows you to create, edit, delete and update posts and manage the comments of each post.
+**Important** The project uses an API [backend](https://github.com/udacity/reactnd-project-readable-starter) provided by the **Udacity** teachers.
+
+Its a simple Hacker News style forum platform that allows you to create, edit, delete and update posts and manage the comments of each post.
 
 ### Getting Started
 
