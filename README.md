@@ -29,6 +29,13 @@ npm start
 ```
 A new browser window will open with the URL pointed to [localhost:3000](http://localhost:3000/) where you can interact with the app's interface.
 
+## Screenshots
+
+![Posts Overview](src/images/Main.png)
+![Posts Detail](src/Post_Detail.png)
+![Comment Modal](src/Comment_Modal.png)
+
+
 ### Built With
 * [npm](https://www.npmjs.com/)
 * [Node](https://nodejs.org/en/)
